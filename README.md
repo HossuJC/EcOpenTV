@@ -1,1 +1,1 @@
-# EcuadorOpenTV
+# EcOpenTV
