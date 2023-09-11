@@ -8,9 +8,9 @@ https://teleamazonas-live.cdn.vustreams.com/live/0fc97608-6057-4db8-9af7-102c21a
 #EXTINF:-1 tvg-id="7" tvg-chno="7" tvg-name="Ecuador TV" tvg-logo="https://hossujc.github.io/EcOpenTV/m3u-lists/assets/logo-007.png",Ecuador TV
 https://customer-qczi39xffvq35rae.cloudflarestream.com/f41c1d91e17809daf3bc4a6c212680b7/manifest/video.m3u8?parentOrigin=https%3A%2F%2Fwww.ecuadortv.ec
 #EXTINF:-1 tvg-id="8" tvg-chno="8" tvg-name="Gamavisión" tvg-logo="https://hossujc.github.io/EcOpenTV/m3u-lists/assets/logo-008.png",Gamavisión
-https://live-ak.vimeocdn.com/exp=1694342260~acl=%2F10088ac7-c297-4c5c-8bbe-22e4181ffc4b%2F%2A~hmac=1e1003ba9804a54ba7711c8a4d1e51cae48d7872e206ac5344d0393ab04d1185/10088ac7-c297-4c5c-8bbe-22e4181ffc4b/hls.m3u8
+https://live-ak.vimeocdn.com/exp=1694440503~acl=%2F72cd6c40-7ddd-4d33-872f-fbc605d9b79f%2F%2A~hmac=00c67f1bd6ff03cf01b4c7a0c61a40d465b6e6f01d6962e1df4ac8bc53cd5f12/72cd6c40-7ddd-4d33-872f-fbc605d9b79f/hls.m3u8?min_seconds=30
 #EXTINF:-1 tvg-id="10" tvg-chno="10" tvg-name="TC Televisión" tvg-logo="https://hossujc.github.io/EcOpenTV/m3u-lists/assets/logo-010.png",TC Televisión
-https://www.dailymotion.com/cdn/live/video/x7wijay.m3u8?sec=BlC1XLbAtli100u3QdcY_UwM7OVp_ZSjUqNLrRFMOgL6E_vrpbwpEPmajrti_ZTm&dmTs=911902&dmV1st=44bbd9bb-5d67-4d87-8724-3fc092cd1fc9
+https://www.dailymotion.com/cdn/live/video/x7wijay.m3u8?sec=BlC1XLbAtli100u3QdcY_aHGH85OPcnZLXg2hwVvd6Csm93LGyFd3mudaXzWrV5L&dmTs=911902&dmV1st=0c06cccf-ea93-4367-899a-7a9f17caa2f5
 #EXTINF:-1 tvg-id="11" tvg-chno="11" tvg-name="TVC" tvg-logo="https://hossujc.github.io/EcOpenTV/m3u-lists/assets/logo-011.png",TVC
 https://d2vb5iv6i34lh5.cloudfront.net/TVCEC/d58f5eb5cbb9ad9c56649a0083de7c8b.sdp/playlist.m3u8
 #EXTINF:-1 tvg-id="24" tvg-chno="24" tvg-name="La redonda TV" tvg-logo="https://hossujc.github.io/EcOpenTV/m3u-lists/assets/logo-024.png",La redonda TV
