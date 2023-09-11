@@ -1,13 +1,13 @@
 #EXTM3U
-#EXTINF:-1 tvg-id="2" tvg-name="Ecuavisa" tvg-logo="https://hossujc.github.io/EcOpenTV/m3u-lists/assets/logo-002.png",Ecuavisa
+#EXTINF:-1 tvg-id="2" tvg-chno="2" tvg-name="Ecuavisa" tvg-logo="https://hossujc.github.io/EcOpenTV/m3u-lists/assets/logo-002.png",Ecuavisa
 https://mdstrm.com/live-stream-playlist/603ea23f928cc5255563012c.m3u8
-#EXTINF:-1 tvg-id="4" tvg-name="RTS" tvg-logo="https://hossujc.github.io/EcOpenTV/m3u-lists/assets/logo-004.png",RTS
+#EXTINF:-1 tvg-id="4" tvg-chno="4" tvg-name="RTS" tvg-logo="https://hossujc.github.io/EcOpenTV/m3u-lists/assets/logo-004.png",RTS
 https://d2vb5iv6i34lh5.cloudfront.net/RTSEC/93fc3c04cedad73f1f80aebf11451d53.sdp/playlist.m3u8
-#EXTINF:-1 tvg-id="5" tvg-name="Teleamazonas" tvg-logo="https://hossujc.github.io/EcOpenTV/m3u-lists/assets/logo-005.png",Teleamazonas
+#EXTINF:-1 tvg-id="5" tvg-chno="5" tvg-name="Teleamazonas" tvg-logo="https://hossujc.github.io/EcOpenTV/m3u-lists/assets/logo-005.png",Teleamazonas
 https://teleamazonas-live.cdn.vustreams.com/live/0fc97608-6057-4db8-9af7-102c21ac18af/live.isml/0fc97608-6057-4db8-9af7-102c21ac18af.m3u8
-#EXTINF:-1 tvg-id="7" tvg-name="Ecuador TV" tvg-logo="https://hossujc.github.io/EcOpenTV/m3u-lists/assets/logo-007.png",Ecuador TV
+#EXTINF:-1 tvg-id="7" tvg-chno="7" tvg-name="Ecuador TV" tvg-logo="https://hossujc.github.io/EcOpenTV/m3u-lists/assets/logo-007.png",Ecuador TV
 https://customer-qczi39xffvq35rae.cloudflarestream.com/f41c1d91e17809daf3bc4a6c212680b7/manifest/video.m3u8?parentOrigin=https%3A%2F%2Fwww.ecuadortv.ec
-#EXTINF:-1 tvg-id="8" tvg-name="Gamavisión" tvg-logo="https://hossujc.github.io/EcOpenTV/m3u-lists/assets/logo-008.png",Gamavisión
+#EXTINF:-1 tvg-id="8" tvg-chno="8" tvg-name="Gamavisión" tvg-logo="https://hossujc.github.io/EcOpenTV/m3u-lists/assets/logo-008.png",Gamavisión
 https://live-ak.vimeocdn.com/exp=1694342260~acl=%2F10088ac7-c297-4c5c-8bbe-22e4181ffc4b%2F%2A~hmac=1e1003ba9804a54ba7711c8a4d1e51cae48d7872e206ac5344d0393ab04d1185/10088ac7-c297-4c5c-8bbe-22e4181ffc4b/hls.m3u8
-#EXTINF:-1 tvg-id="10" tvg-name="TC Televisión" tvg-logo="https://hossujc.github.io/EcOpenTV/m3u-lists/assets/logo-010.png",TC Televisión
+#EXTINF:-1 tvg-id="10" tvg-chno="10" tvg-name="TC Televisión" tvg-logo="https://hossujc.github.io/EcOpenTV/m3u-lists/assets/logo-010.png",TC Televisión
 https://www.dailymotion.com/cdn/live/video/x7wijay.m3u8?sec=BlC1XLbAtli100u3QdcY_dziCPj-AXCkYJdJ1rtREyOVXBxiekbys4tPo6aJxEzX&dmTs=911902&dmV1st=9aafa73b-2ef1-440e-8e1e-7e0098fea3ed
