@@ -1,0 +1,17 @@
+{
+    "compilerOptions": {
+      "target": "ES2022",
+      "lib": ["ES2022"],
+      "module": "commonjs",
+      "strict": true,
+      "esModuleInterop": true,
+      "skipLibCheck": true,
+      "forceConsistentCasingInFileNames": true,
+      "moduleResolution": "node",
+      "resolveJsonModule": true,
+      "outDir": "dist"
+    },
+    "include": ["src", "m3u-lists"],
+    "exclude": ["node_modules"]
+  }
+  
