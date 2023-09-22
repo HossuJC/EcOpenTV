@@ -6,7 +6,7 @@ https://d2vb5iv6i34lh5.cloudfront.net/RTSEC/93fc3c04cedad73f1f80aebf11451d53.sdp
 #EXTINF:-1 tvg-id="5" tvg-chno="5" tvg-name="Teleamazonas" tvg-logo="https://hossujc.github.io/EcOpenTV/m3u-lists/assets/logo-005.png",Teleamazonas
 https://teleamazonas-live.cdn.vustreams.com/live/0fc97608-6057-4db8-9af7-102c21ac18af/live.isml/0fc97608-6057-4db8-9af7-102c21ac18af.m3u8
 #EXTINF:-1 tvg-id="7" tvg-chno="7" tvg-name="Ecuador TV" tvg-logo="https://hossujc.github.io/EcOpenTV/m3u-lists/assets/logo-007.png",Ecuador TV
-https://customer-qczi39xffvq35rae.cloudflarestream.com/f41c1d91e17809daf3bc4a6c212680b7/manifest/video.m3u8?parentOrigin=https%3A%2F%2Fwww.ecuadortv.ec
+https://samson.streamerr.co:8081/akira/index.m3u8
 #EXTINF:-1 tvg-id="8" tvg-chno="8" tvg-name="Gamavisión" tvg-logo="https://hossujc.github.io/EcOpenTV/m3u-lists/assets/logo-008.png",Gamavisión
 null
 #EXTINF:-1 tvg-id="10" tvg-chno="10" tvg-name="TC Televisión" tvg-logo="https://hossujc.github.io/EcOpenTV/m3u-lists/assets/logo-010.png",TC Televisión

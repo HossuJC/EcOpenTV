@@ -30,7 +30,7 @@ const ec_list: any = {
             "tvg-chno": 7,
             "tvg-name": "Ecuador TV",
             "tvg-logo": "https://hossujc.github.io/EcOpenTV/m3u-lists/assets/logo-007.png",
-            "url": "https://customer-qczi39xffvq35rae.cloudflarestream.com/f41c1d91e17809daf3bc4a6c212680b7/manifest/video.m3u8?parentOrigin=https%3A%2F%2Fwww.ecuadortv.ec"
+            "url": "https://samson.streamerr.co:8081/akira/index.m3u8"
         },
         {
             "#EXTINF": -1,
