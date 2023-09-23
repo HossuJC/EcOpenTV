@@ -38,7 +38,8 @@ const ec_list: any = {
             "tvg-chno": 8,
             "tvg-name": "Gamavisión",
             "tvg-logo": "https://hossujc.github.io/EcOpenTV/m3u-lists/assets/logo-008.png",
-            "url": null
+            "url": null,
+            "default": "/api/v1/canales/canal-8.m3u8"
         },
         {
             "#EXTINF": -1,
@@ -46,7 +47,8 @@ const ec_list: any = {
             "tvg-chno": 10,
             "tvg-name": "TC Televisión",
             "tvg-logo": "https://hossujc.github.io/EcOpenTV/m3u-lists/assets/logo-010.png",
-            "url": null
+            "url": null,
+            "default": "/api/v1/canales/canal-10.m3u8"
         },
         {
             "#EXTINF": -1,
