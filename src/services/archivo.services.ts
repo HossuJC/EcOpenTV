@@ -41,7 +41,7 @@ export async function getM3UListEc(req: Request, res: Response) {
 
     } catch(error) {
         console.error(new Date() + " " + "Get m3u list Ec:", error);
-        res.status(500).json("Lista no disponible");
+        res.status(500).json("Lista de canales no disponible");
     }
     
 }

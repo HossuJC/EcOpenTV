@@ -40,7 +40,19 @@ export async function getCanal10(res: Response) {
 
 export async function getCanal10URL(timeout = 15000): Promise<string | undefined> {
     let finalUrl;
-    const browser = await puppeteer.launch({ headless: 'new', channel: 'chrome', args: ['--disable-notifications'] });
+    const browser = await puppeteer.launch({
+        headless: 'new',
+        args: [
+            '--disable-notifications',
+            "--disable-setuid-sandbox",
+            "--no-sandbox",
+            // "--single-process",
+            "--no-zygote",
+        ],
+        executablePath: process.env.NODE_ENV === "production"
+            ? process.env.PUPPETEER_EXECUTABLE_PATH
+            : puppeteer.executablePath('chrome')
+    });
     const page = await browser.newPage();
     let pagePromise;
 
