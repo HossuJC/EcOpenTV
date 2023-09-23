@@ -58,6 +58,7 @@ export async function getCanal8URL(timeout = 30000): Promise<string | undefined>
             ? process.env.PUPPETEER_EXECUTABLE_PATH
             : puppeteer.executablePath('chrome')
     });
+    console.log("Environment: " + process.env.NODE_ENV)
     const page = (await browser.pages())[0];
 
     try {
