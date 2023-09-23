@@ -1,5 +1,6 @@
 import express, { Application, Request, Response } from "express";
 import bodyParser from "body-parser";
+import "dotenv/config";
 
 const app: Application = express();
 
@@ -11,15 +12,31 @@ app.get("/", (req: Request, res: Response) => {
 });
 
 import canalesRouter from "./routes/canales.routes";
-import archivosRouter from "./routes/archivo.routes";
+import listaRouter from "./routes/lista.routes";
+import logoRouter from "./routes/logo.route";
+import {
+  generateM3UListEc,
+  randomIntFromInterval,
+} from "./services/lista.services";
 
-const endpointV1 = "/api/v1"
+const endpointV1 = "/api/v1";
 
 app.use(endpointV1 + "/canales", canalesRouter);
-app.use(endpointV1 + "/archivos", archivosRouter);
+app.use(endpointV1 + "/listas", listaRouter);
+app.use(endpointV1 + "/logos", logoRouter);
 
 const PORT = process.env.PORT || 8000;
 
 app.listen(PORT, () => {
   console.log(`Server is running on PORT ${PORT}`);
 });
+
+setTimeout(() => {
+  console.log(new Date() + " " + "Automated list generation running");
+  generateM3UListEc(60000);
+}, 1000 * 60 * 1);
+
+setInterval(() => {
+  console.log(new Date() + " " + "Automated list generation running");
+  generateM3UListEc(60000);
+}, 1000 * 60 * 10 + randomIntFromInterval(0, 1000 * 60 * 5));
