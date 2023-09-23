@@ -16,7 +16,7 @@ export async function getM3UListEc(req: Request, res: Response) {
 
     try {
 
-        let canal8url = getCanal8URL();
+        let canal8url = getCanal8URL(30000);
         let canal10url = getCanal10URL(30000);
         let m3u: any = ec_list;
     

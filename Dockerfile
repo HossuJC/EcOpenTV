@@ -7,5 +7,6 @@ WORKDIR /usr/src/app
 
 COPY package*.json ./
 RUN npm ci
+RUN npm run build
 COPY . .
-CMD [ "ts-node", "src/index.ts" ]
+CMD [ "node", "dist/src/index.js" ]
