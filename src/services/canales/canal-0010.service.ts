@@ -46,7 +46,7 @@ export async function getCanal10(req: Request, res: Response) {
 export async function getCanal10URL(timeout = 30000): Promise<string | undefined> {
     let finalUrl;
     const browser = await puppeteer.launch({
-        headless: false,
+        headless: 'new',
         args: [
             '--disable-notifications',
             "--disable-setuid-sandbox",
