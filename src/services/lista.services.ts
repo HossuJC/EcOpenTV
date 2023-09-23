@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import path from 'path';
 import fs from 'fs';
-import ec_list from "../../m3u-lists/ec_list";
+import ec_list from "../m3u-lists/ec_list";
 import { getCanal8URL } from "./canales/canal-0008.service";
 import { getCanal10URL } from "./canales/canal-0010.service";
 
@@ -17,7 +17,7 @@ export async function getM3UListEc(req: Request, res: Response) {
 
     try {
         const fileName = req.url.split('/')[1].split('?')[0];
-        const filePath = path.join(__dirname, '..', '..', 'm3u-lists', fileName);
+        const filePath = path.join(__dirname, '..', 'm3u-lists', fileName);
     
         res.setHeader('Content-Disposition', `attachment; filename="${fileName}"`);
         res.setHeader('Content-Type', 'audio/x-mpegurl');
@@ -50,7 +50,7 @@ export async function generateM3UListEc(timeout) {
 
     let m3u: any = ec_list;
     
-    const filePath = path.join(__dirname, '..', '..', 'm3u-lists', 'ec.m3u');
+    const filePath = path.join(__dirname, '..', 'm3u-lists', 'ec.m3u');
     
     let canal8url;
     let canal10url;

@@ -13,7 +13,7 @@
       "types": ["node"],
       "noImplicitAny": false
     },
-    "include": ["src", "m3u-lists"],
+    "include": ["src"],
     "exclude": ["node_modules"]
   }
   

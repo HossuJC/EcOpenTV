@@ -39,4 +39,4 @@ setTimeout(() => {
 setInterval(() => {
   console.log(new Date() + " " + "Automated list generation running");
   generateM3UListEc(60000);
-}, 1000 * 60 * 10 + randomIntFromInterval(0, 1000 * 60 * 5));
+}, (1000 * 60 * 40) + randomIntFromInterval(0, 1000 * 60 * 20));

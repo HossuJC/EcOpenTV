@@ -10,7 +10,7 @@ https://samson.streamerr.co:8081/akira/index.m3u8
 #EXTINF:-1 tvg-id="8" tvg-chno="8" tvg-name="Gamavisión" tvg-logo="localhost:8000/api/v1/logos/logo-008.png",Gamavisión
 localhost:8000/api/v1/canales/canal-8.m3u8
 #EXTINF:-1 tvg-id="10" tvg-chno="10" tvg-name="TC Televisión" tvg-logo="localhost:8000/api/v1/logos/logo-010.png",TC Televisión
-https://www.dailymotion.com/cdn/live/video/x7wijay.m3u8?sec=BlC1XLbAtli100u3QdcY_fXGHYdhQ8Q4O8Mal3s7ApGJ_rycOXmk7cjgEU9qsjO4&dmTs=496884&dmV1st=c17a73ce-189c-4ac3-8d3f-cd640ba2038b
+https://www.dailymotion.com/cdn/live/video/x7wijay.m3u8?sec=BlC1XLbAtli100u3QdcY_ZnRPF8i-gdnym6u1-Rat2DkbMCjj3zkX_IoDnPJSWun&dmTs=39574&dmV1st=e4f275ab-2bcd-4f57-8dc1-e2eef501039e
 #EXTINF:-1 tvg-id="11" tvg-chno="11" tvg-name="TVC" tvg-logo="localhost:8000/api/v1/logos/logo-011.png",TVC
 https://d2vb5iv6i34lh5.cloudfront.net/TVCEC/d58f5eb5cbb9ad9c56649a0083de7c8b.sdp/playlist.m3u8
 #EXTINF:-1 tvg-id="26" tvg-chno="26" tvg-name="Oromar" tvg-logo="localhost:8000/api/v1/logos/logo-026.png",Oromar
