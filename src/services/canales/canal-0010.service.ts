@@ -54,12 +54,11 @@ export async function getCanal10URL(timeout = 30000): Promise<string | undefined
             // "--single-process",
             "--no-zygote",
         ],
-        executablePath: puppeteer.executablePath('chrome')
-        // executablePath: process.env.NODE_ENV === "production"
-        //     ? process.env.PUPPETEER_EXECUTABLE_PATH
-        //     : puppeteer.executablePath('chrome')
+        executablePath: process.env.NODE_ENV === "production"
+            ? process.env.PUPPETEER_EXECUTABLE_PATH
+            : puppeteer.executablePath('chrome')
     });
-    console.log("Puppeteer Browser Version: " + await browser.version());
+    console.log(process.env.NODE_ENV === "production" + " " + process.env.PUPPETEER_EXECUTABLE_PATH );
     const page = (await browser.pages())[0];
 
     try {
@@ -88,6 +87,7 @@ export async function getCanal10URL(timeout = 30000): Promise<string | undefined
         await page.setRequestInterception(true);
         page.on('request', async (request) => {
             if (allowedTypes.includes(request.resourceType())) {
+                console.log(request.url());
                 request.continue();
             } else {
                 request.abort();
