@@ -23,6 +23,7 @@ export async function getM3UListEc(req: Request, res: Response) {
         res.setHeader('Content-Type', 'audio/x-mpegurl');
 
         const fileStream = fs.createReadStream(filePath);
+        console.log(new Date() + " " + "getM3UListEc: Sending list to " + req.ip);
         fileStream.pipe(res);
     } catch (error) {
         console.error(new Date() + " " + "Error getting list:", error);

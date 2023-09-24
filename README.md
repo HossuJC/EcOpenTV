@@ -1,2 +1,2 @@
 # EcOpenTV
-M3U List -> https://hossujc.github.io/EcOpenTV/m3u-lists/ec.m3u
+M3U List -> https://ec-open-tv-ifer-dev.fl0.io/api/v1/listas/ec.m3u
