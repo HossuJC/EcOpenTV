@@ -34,13 +34,13 @@ app.listen(PORT, () => {
 setTimeout(() => {
   if (process.env.ENVIRONMENT !== "develop") {
     console.log(new Date() + " " + "Automated list generation running");
-    generateM3UListEc(120000);
+    generateM3UListEc(60000);
   }
-}, 1000 * 60 * 1);
+}, 1000 * 10);
 
 setInterval(() => {
   if (process.env.ENVIRONMENT !== "develop") {
     console.log(new Date() + " " + "Automated list generation running");
-    generateM3UListEc(120000);
+    generateM3UListEc(60000);
   }
 }, (1000 * 60 * 40) + randomIntFromInterval(0, 1000 * 60 * 20));

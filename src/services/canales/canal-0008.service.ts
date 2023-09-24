@@ -54,13 +54,15 @@ export async function getCanal8URL(timeout = 30000): Promise<string | undefined>
             "--no-sandbox",
             // "--single-process",
             "--no-zygote",
+            "--disable-features=site-per-process",
         ],
-        executablePath: process.env.ENVIRONMENT !== "develop"
-            ? process.env.PUPPETEER_EXECUTABLE_PATH
-            : puppeteer.executablePath('chrome')
+        executablePath: puppeteer.executablePath('chrome')
+        // executablePath: process.env.ENVIRONMENT !== "develop"
+        //     ? process.env.PUPPETEER_EXECUTABLE_PATH
+        //     : puppeteer.executablePath('chrome')
     });
-    console.log(process.env.ENVIRONMENT !== "develop");
-    console.log(process.env.PUPPETEER_EXECUTABLE_PATH);
+    // console.log(process.env.ENVIRONMENT !== "develop");
+    // console.log(process.env.PUPPETEER_EXECUTABLE_PATH);
     const page = (await browser.pages())[0];
 
     try {
@@ -89,7 +91,7 @@ export async function getCanal8URL(timeout = 30000): Promise<string | undefined>
         await page.setRequestInterception(true);
         page.on('request', async (request) => {
             if (allowedTypes.includes(request.resourceType())) {
-                console.log(request.url());
+                // console.log(request.url());
                 request.continue();
             } else {
                 request.abort();
@@ -110,7 +112,7 @@ export async function getCanal8URL(timeout = 30000): Promise<string | undefined>
         }, {timeout: timeout});
 
         if (request) {
-            finalUrl = request.url();
+            finalUrl = request?.url();
         }
 
     } catch (error) {
