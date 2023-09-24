@@ -54,11 +54,11 @@ export async function getCanal10URL(timeout = 30000): Promise<string | undefined
             // "--single-process",
             "--no-zygote",
         ],
-        executablePath: process.env.ENVIRONMENT === "production"
+        executablePath: process.env.ENVIRONMENT !== "develop"
             ? process.env.PUPPETEER_EXECUTABLE_PATH
             : puppeteer.executablePath('chrome')
     });
-    console.log(process.env.ENVIRONMENT === "production" + " " + process.env.PUPPETEER_EXECUTABLE_PATH );
+    console.log(process.env.ENVIRONMENT !== "develop" + " " + process.env.PUPPETEER_EXECUTABLE_PATH );
     const page = (await browser.pages())[0];
 
     try {
@@ -103,12 +103,12 @@ export async function getCanal10URL(timeout = 30000): Promise<string | undefined
                 console.error(new Date() + " " + "Get channel 8: Error loading page:", error);
             }
         });
-        const response = await page.waitForResponse(response => {
-            return response.url().includes('https://www.dailymotion.com/cdn/live/video/x7wijay.m3u8') && response.ok();
+        const request = await page.waitForRequest(request => {
+            return request.url().includes('https://www.dailymotion.com/cdn/live/video/x7wijay.m3u8');
         }, {timeout: timeout});
 
-        if (response) {
-            finalUrl = response.url();
+        if (request) {
+            finalUrl = request.url();
         }
 
     } catch (error) {

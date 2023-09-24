@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 import puppeteer from 'puppeteer';
 import https from 'https';
 import { pipeline } from 'stream';
+import { request } from 'http';
 
 export async function getCanal8(req: Request, res: Response) {
 
@@ -54,11 +55,11 @@ export async function getCanal8URL(timeout = 30000): Promise<string | undefined>
             // "--single-process",
             "--no-zygote",
         ],
-        executablePath: process.env.ENVIRONMENT === "production"
+        executablePath: process.env.ENVIRONMENT !== "develop"
             ? process.env.PUPPETEER_EXECUTABLE_PATH
             : puppeteer.executablePath('chrome')
     });
-    console.log(process.env.ENVIRONMENT === "production" + " " + process.env.PUPPETEER_EXECUTABLE_PATH );
+    console.log(process.env.ENVIRONMENT !== "develop" + " " + process.env.PUPPETEER_EXECUTABLE_PATH );
     const page = (await browser.pages())[0];
 
     try {
@@ -103,12 +104,12 @@ export async function getCanal8URL(timeout = 30000): Promise<string | undefined>
                 console.error(new Date() + " " + "Get channel 8: Error loading page:", error);
             }
         });
-        const response = await page.waitForResponse(response => {
-            return response.url().includes('https://live-api.vimeocdn.com/') && response.ok();
+        const request = await page.waitForRequest(request => {
+            return request.url().includes('https://live-ak.vimeocdn.com/');
         }, {timeout: timeout});
 
-        if (response) {
-            finalUrl = (await response.json()).url;
+        if (request) {
+            finalUrl = request.url();
         }
 
     } catch (error) {

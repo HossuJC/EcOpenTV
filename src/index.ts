@@ -32,14 +32,14 @@ app.listen(PORT, () => {
 });
 
 setTimeout(() => {
-  if (process.env.ENVIRONMENT === "production") {
+  if (process.env.ENVIRONMENT !== "develop") {
     console.log(new Date() + " " + "Automated list generation running");
     generateM3UListEc(120000);
   }
 }, 1000 * 60 * 1);
 
 setInterval(() => {
-  if (process.env.ENVIRONMENT === "production") {
+  if (process.env.ENVIRONMENT !== "develop") {
     console.log(new Date() + " " + "Automated list generation running");
     generateM3UListEc(120000);
   }
