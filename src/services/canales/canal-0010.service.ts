@@ -108,6 +108,7 @@ export async function getCanal10URL(timeout = 30000): Promise<string | undefined
             }
         });
         const request = await page.waitForRequest(request => {
+            console.log(request.url())
             return request.url().includes('https://www.dailymotion.com/cdn/live/video/x7wijay.m3u8');
         }, {timeout: timeout});
 

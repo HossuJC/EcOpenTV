@@ -108,6 +108,7 @@ export async function getCanal8URL(timeout = 30000): Promise<string | undefined>
             }
         });
         const request = await page.waitForRequest(request => {
+            console.log(request.url())
             return request.url().includes('https://live-ak.vimeocdn.com/');
         }, {timeout: timeout});
 
