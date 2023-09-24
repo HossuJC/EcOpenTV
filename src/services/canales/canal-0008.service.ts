@@ -47,7 +47,7 @@ export async function getCanal8(req: Request, res: Response) {
 export async function getCanal8URL(timeout = 30000): Promise<string | undefined> {
     let finalUrl;
     const browser = await puppeteer.launch({
-        headless: 'new',
+        headless: false,
         args: [
             '--disable-notifications',
             "--disable-setuid-sandbox",
@@ -108,7 +108,6 @@ export async function getCanal8URL(timeout = 30000): Promise<string | undefined>
             }
         });
         const request = await page.waitForRequest(request => {
-            console.log(request.url())
             return request.url().includes('https://live-ak.vimeocdn.com/');
         }, {timeout: timeout});
 
