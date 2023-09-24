@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 import puppeteer from 'puppeteer';
 import https from 'https';
 import { pipeline } from 'stream';
+import "dotenv/config";
 
 export async function getCanal10(req: Request, res: Response) {
 
@@ -58,7 +59,8 @@ export async function getCanal10URL(timeout = 30000): Promise<string | undefined
             ? process.env.PUPPETEER_EXECUTABLE_PATH
             : puppeteer.executablePath('chrome')
     });
-    console.log(process.env.ENVIRONMENT !== "develop" + " " + process.env.PUPPETEER_EXECUTABLE_PATH );
+    console.log(process.env.ENVIRONMENT !== "develop");
+    console.log(process.env.PUPPETEER_EXECUTABLE_PATH);
     const page = (await browser.pages())[0];
 
     try {
@@ -95,7 +97,7 @@ export async function getCanal10URL(timeout = 30000): Promise<string | undefined
         });
 
         console.log(new Date() + " " + "Get channel 10: start of page load");
-        page.setDefaultNavigationTimeout(0);
+        page.setDefaultNavigationTimeout(timeout);
         page.goto('https://www.tctelevision.com/tc-en-vivo').catch(error => {
             if (error.message === "Navigating frame was detached") {
                 void error;
