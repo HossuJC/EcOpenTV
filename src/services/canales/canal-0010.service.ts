@@ -54,9 +54,10 @@ export async function getCanal10URL(timeout = 30000): Promise<string | undefined
             // "--single-process",
             "--no-zygote",
         ],
-        executablePath: process.env.NODE_ENV === "production"
-            ? process.env.PUPPETEER_EXECUTABLE_PATH
-            : puppeteer.executablePath('chrome')
+        executablePath: puppeteer.executablePath('chrome')
+        // executablePath: process.env.NODE_ENV === "production"
+        //     ? process.env.PUPPETEER_EXECUTABLE_PATH
+        //     : puppeteer.executablePath('chrome')
     });
     console.log("Puppeteer Browser Version: " + await browser.version());
     const page = (await browser.pages())[0];
