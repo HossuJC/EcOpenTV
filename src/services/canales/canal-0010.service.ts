@@ -91,7 +91,7 @@ export async function getCanal10URL(timeout = 30000): Promise<string | undefined
         await page.setRequestInterception(true);
         page.on('request', async (request) => {
             if (allowedTypes.includes(request.resourceType())) {
-                // console.log(request.url());
+                console.log(new Date());
                 request.continue();
             } else {
                 request.abort();

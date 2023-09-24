@@ -61,8 +61,8 @@ export async function generateM3UListEc(timeout) {
 
     try {
 
-        canal8url = await getCanal8URL(timeout);
         canal10url = await getCanal10URL(timeout);
+        canal8url = await getCanal8URL(timeout);
     
         console.log(new Date() + " " + "Get m3u list Ec: Channel 8 url: " + canal8url ?? "Using default");
         console.log(new Date() + " " + "Get m3u list Ec: Channel 10 url: " + canal10url ?? "Using default");
