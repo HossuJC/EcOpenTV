@@ -75,9 +75,9 @@ export async function generateM3UListEc(timeout) {
 
         for (let i = 0; i < m3u['#EXTM3U'].length; i++) {
             if (m3u['#EXTM3U'][i]['tvg-id'] === '8') {
-                m3u['#EXTM3U'][i]['url'] = canal8url || m3u['#EXTM3U'][i]['default'];
+                m3u['#EXTM3U'][i]['url'] = canal8url || 'http://null';
             } else if (m3u['#EXTM3U'][i]['tvg-id'] === '10') {
-                m3u['#EXTM3U'][i]['url'] = canal10url || m3u['#EXTM3U'][i]['default'];
+                m3u['#EXTM3U'][i]['url'] = canal10url || 'http://null';
                 break;
             }
         }
