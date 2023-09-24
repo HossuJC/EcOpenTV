@@ -33,10 +33,10 @@ app.listen(PORT, () => {
 
 setTimeout(() => {
   console.log(new Date() + " " + "Automated list generation running");
-  generateM3UListEc(60000);
+  generateM3UListEc(120000);
 }, 1000 * 60 * 1);
 
 setInterval(() => {
   console.log(new Date() + " " + "Automated list generation running");
-  generateM3UListEc(60000);
+  generateM3UListEc(120000);
 }, (1000 * 60 * 40) + randomIntFromInterval(0, 1000 * 60 * 20));
