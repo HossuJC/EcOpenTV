@@ -5,8 +5,6 @@
   "main": "index.js",
   "scripts": {
     "build": "tsc",
-    "copy-assets-unix": "cp -r src/assets dist/",
-    "copy-assets-windows": "xcopy /E /I src\\assets dist\\assets",
     "start": "ts-node src/index.ts",
     "dev": "ts-node-dev --respawn --transpile-only src/index.ts"
   },

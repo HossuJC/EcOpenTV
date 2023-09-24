@@ -19,12 +19,15 @@ export async function getM3UListEc(req: Request, res: Response) {
         const fileName = req.url.split('/')[1].split('?')[0];
         const filePath = path.join(__dirname, '..', 'm3u-lists', fileName);
     
-        // res.setHeader('Content-Disposition', `attachment; filename="${fileName}"`);
-        res.setHeader('Content-Type', 'audio/x-mpegurl');
-
-        const fileStream = fs.createReadStream(filePath);
-        console.log(new Date() + " " + "getM3UListEc: Sending list to " + req.ip);
-        fileStream.pipe(res);
+        if (fs.existsSync(filePath)) { 
+            res.setHeader('Content-Type', 'audio/x-mpegurl');
+            const fileStream = fs.createReadStream(filePath);
+            console.log(new Date() + " " + "getM3UListEc: Sending list to " + req.ip);
+            fileStream.pipe(res);
+        } else {
+            console.error(new Date() + " " + "List does not exist yet");
+            res.status(404).json("La lista aún no ha sido generada");
+        }
     } catch (error) {
         console.error(new Date() + " " + "Error getting list:", error);
         res.status(500).json("Error al obtener lista");

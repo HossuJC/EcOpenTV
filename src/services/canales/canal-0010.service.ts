@@ -58,6 +58,7 @@ export async function getCanal10URL(timeout = 30000): Promise<string | undefined
             ? process.env.PUPPETEER_EXECUTABLE_PATH
             : puppeteer.executablePath('chrome')
     });
+    console.log("Puppeteer Browser Version: " + await browser.version());
     const page = (await browser.pages())[0];
 
     try {
@@ -66,7 +67,6 @@ export async function getCanal10URL(timeout = 30000): Promise<string | undefined
             "xhr",
             "script",
             "document",
-            // "stylesheet",
             // "image",
             // "media",
             // "font",
@@ -80,7 +80,8 @@ export async function getCanal10URL(timeout = 30000): Promise<string | undefined
             // "ping",
             // "cspviolationreport",
             // "preflight",
-            // "other"
+            // "other",
+            // "stylesheet",
         ];
 
         await page.setRequestInterception(true);

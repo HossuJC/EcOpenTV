@@ -58,7 +58,7 @@ export async function getCanal8URL(timeout = 30000): Promise<string | undefined>
             ? process.env.PUPPETEER_EXECUTABLE_PATH
             : puppeteer.executablePath('chrome')
     });
-    console.log("Environment: " + process.env.NODE_ENV)
+    console.log("Puppeteer Browser Version: " + await browser.version());
     const page = (await browser.pages())[0];
 
     try {
@@ -67,13 +67,13 @@ export async function getCanal8URL(timeout = 30000): Promise<string | undefined>
             "xhr",
             "script",
             "document",
-            // "stylesheet",
+            "prefetch",
+            "stylesheet",
             // "image",
             // "media",
             // "font",
             // "texttrack",
             // "fetch",
-            // "prefetch",
             // "eventsource",
             // "websocket",
             // "manifest",
@@ -81,7 +81,7 @@ export async function getCanal8URL(timeout = 30000): Promise<string | undefined>
             // "ping",
             // "cspviolationreport",
             // "preflight",
-            // "other"
+            // "other",
         ];
 
         await page.setRequestInterception(true);
