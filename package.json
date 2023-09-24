@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "tsc && npm run copy-assets",
+    "build": "tsc",
     "copy-assets-unix": "cp -r src/assets dist/",
     "copy-assets-windows": "xcopy /E /I src\\assets dist\\assets",
     "start": "ts-node src/index.ts",

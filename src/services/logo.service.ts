@@ -9,7 +9,7 @@ export async function getLogo(req: Request, res: Response) {
         const filePath = path.join(__dirname, '..', 'assets', fileName);
 
         if (fs.existsSync(filePath)) {
-            res.setHeader('Content-Disposition', `attachment; filename="${fileName}"`);
+            // res.setHeader('Content-Disposition', `attachment; filename="${fileName}"`);
             res.setHeader('Content-Type', 'image/png');
             const fileStream = fs.createReadStream(filePath);
             fileStream.pipe(res);

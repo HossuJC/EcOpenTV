@@ -19,7 +19,7 @@ export async function getM3UListEc(req: Request, res: Response) {
         const fileName = req.url.split('/')[1].split('?')[0];
         const filePath = path.join(__dirname, '..', 'm3u-lists', fileName);
     
-        res.setHeader('Content-Disposition', `attachment; filename="${fileName}"`);
+        // res.setHeader('Content-Disposition', `attachment; filename="${fileName}"`);
         res.setHeader('Content-Type', 'audio/x-mpegurl');
 
         const fileStream = fs.createReadStream(filePath);
