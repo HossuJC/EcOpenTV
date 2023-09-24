@@ -47,7 +47,8 @@ export async function getCanal8(req: Request, res: Response) {
 export async function getCanal8URL(timeout = 30000): Promise<string | undefined> {
     let finalUrl;
     const browser = await puppeteer.launch({
-        headless: false,
+        headless: 'new',
+        channel: 'chrome',
         args: [
             '--disable-notifications',
             "--disable-setuid-sandbox",
@@ -56,7 +57,7 @@ export async function getCanal8URL(timeout = 30000): Promise<string | undefined>
             "--no-zygote",
             "--disable-features=site-per-process",
         ],
-        executablePath: puppeteer.executablePath('chrome')
+        // executablePath: puppeteer.executablePath('chrome')
         // executablePath: process.env.ENVIRONMENT !== "develop"
         //     ? process.env.PUPPETEER_EXECUTABLE_PATH
         //     : puppeteer.executablePath('chrome')
