@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import puppeteer from 'puppeteer';
-import https from 'https';
-import { pipeline } from 'stream';
+// import https from 'https';
+// import { pipeline } from 'stream';
 import "dotenv/config";
 
 export async function getCanal10(req: Request, res: Response) {
@@ -75,34 +75,55 @@ export async function getCanal10URL(timeout = 30000): Promise<string | undefined
 
     try {
 
-        const allowedTypes: string [] = [
-            "xhr",
-            "script",
-            "document",
-            // "image",
-            // "media",
-            // "font",
-            // "texttrack",
-            // "fetch",
-            // "prefetch",
-            // "eventsource",
-            // "websocket",
-            // "manifest",
-            // "signedexchange",
-            // "ping",
-            // "cspviolationreport",
-            // "preflight",
-            // "other",
-            // "stylesheet",
+        const blockedTypes: string [] = [
+            // "xhr",
+            // "script",
+            // "document",
+            "image",
+            "media",
+            "font",
+            "texttrack",
+            "fetch",
+            "prefetch",
+            "eventsource",
+            "websocket",
+            "manifest",
+            "signedexchange",
+            "ping",
+            "cspviolationreport",
+            "preflight",
+            "other",
+            "stylesheet",
+        ];
+
+        const blockedUrls: string [] = [
+            "https://code.jquery.com/",
+            "https://securepubads.g.doubleclick.net/",
+            "https://www.gstatic.com/",
+            "https://cdnjs.cloudflare.com/",
+            "https://www.googletagmanager.com/",
+            "https://www.tctelevision.com/core/",
+            "https://programacion.tctelevision.com/",
+            "https://imasdk.googleapis.com/",
+            "https://pebed.dm-event.net/",
+            "https://vendorlist.dmcdn.net/",
+            "https://speedtest.dailymotion.com/latencies.js",
+            "https://dmxleo.dailymotion.com/",
+            "https://static1.dmcdn.net/playerv5/dmp.controls_vod_secondary",
+            "https://static1.dmcdn.net/playerv5/dmp.omid_session_client",
+            "https://static1.dmcdn.net/playerv5/dmp.omweb",
+            "https://static1.dmcdn.net/playerv5/dmp.locale",
+            "https://static1.dmcdn.net/playerv5/dmp.advertising",
+            "https://static1.dmcdn.net/playerv5/dmp.photon_player",
         ];
 
         await page.setRequestInterception(true);
         page.on('request', async (request) => {
-            if (allowedTypes.includes(request.resourceType())) {
+            if (blockedTypes.includes(request.resourceType()) || blockedUrls.some(e => request.url().includes(e))) {
+                request.abort();
+            } else {
                 console.log(request.url());
                 request.continue();
-            } else {
-                request.abort();
             }
         });
 
