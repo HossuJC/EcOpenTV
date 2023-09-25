@@ -89,15 +89,15 @@ export async function getCanal8URL(timeout = 30000): Promise<string | undefined>
             // "other",
         ];
 
-        await page.setRequestInterception(true);
-        page.on('request', async (request) => {
-            if (allowedTypes.includes(request.resourceType())) {
-                console.log(new Date());
-                request.continue();
-            } else {
-                request.abort();
-            }
-        });
+        // await page.setRequestInterception(true);
+        // page.on('request', async (request) => {
+        //     if (allowedTypes.includes(request.resourceType())) {
+        //         console.log(new Date());
+        //         request.continue();
+        //     } else {
+        //         request.abort();
+        //     }
+        // });
 
         console.log(new Date() + " " + "Get channel 8: start of page load");
         page.setDefaultNavigationTimeout(timeout);
