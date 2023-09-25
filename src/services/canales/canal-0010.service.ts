@@ -59,6 +59,7 @@ export async function getCanal10URL(timeout = 30000): Promise<string | undefined
             '--ignore-certificate-errors',
             '--disable-accelerated-2d-canvas',
             '--disable-gpu',
+            '--disable-dev-shm-usage',
         ],
         // executablePath: puppeteer.executablePath('chrome')
         // executablePath: process.env.ENVIRONMENT !== "develop"
@@ -102,7 +103,10 @@ export async function getCanal10URL(timeout = 30000): Promise<string | undefined
         //     }
         // });
 
-        page.on('error', err => {
+        page.on('error', async err => {
+            if (!page.isClosed()) {
+                await page.close().catch(e => void e);
+                }
             console.log("")
             console.log("===================================================")
             console.error(err)
@@ -136,7 +140,9 @@ export async function getCanal10URL(timeout = 30000): Promise<string | undefined
 
     } finally {
 
+        if (!page.isClosed()) {
         await page.close().catch(e => void e);
+        }
         await browser.close().catch(e => void e);
         console.log("Get channel 10: end of page load");
 
