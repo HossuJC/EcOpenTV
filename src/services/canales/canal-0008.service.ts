@@ -64,7 +64,7 @@ export async function getCanal8URL(timeout = 30000): Promise<string | undefined>
     });
     // console.log(process.env.ENVIRONMENT !== "develop");
     // console.log(process.env.PUPPETEER_EXECUTABLE_PATH);
-    const page = (await browser.pages())[0];
+    const page = await browser.newPage();
 
     try {
 
@@ -99,25 +99,44 @@ export async function getCanal8URL(timeout = 30000): Promise<string | undefined>
         //     }
         // });
 
-        console.log("Get channel 8: start of page load");
-        page.setDefaultNavigationTimeout(timeout);
-        page.goto('https://www.gamavision.com.ec/').catch(error => {
-            if (error.message === "Navigating frame was detached") {
-                void error;
-            } else {
-                console.error("Get channel 8: Error loading page:", error);
-            }
-        });
-        const request = await page.waitForRequest(request => {
+        await page.setRequestInterception(true);
+        page.on('request', async (request) => {
             if (allowedTypes.includes(request.resourceType())) {
                 console.log(request.url());
+                if (request.url().includes('https://live-ak.vimeocdn.com/')) {
+                    finalUrl = request?.url();
+                    await page.close().catch(e => void e);
+                } else {
+                    request.continue();
+                }
+            } else {
+                request.abort();
             }
-            return request.url().includes('https://live-ak.vimeocdn.com/');
-        }, {timeout: timeout});
+        });
 
-        if (request) {
-            finalUrl = request?.url();
-        }
+        console.log("Get channel 8: start of page load");
+        page.setDefaultNavigationTimeout(timeout);
+
+        await Promise.race([
+            page.goto('https://www.gamavision.com.ec/').catch(error => {
+                if (error.message === "Navigating frame was detached") {
+                    void error;
+                } else {
+                    console.error("Get channel 8: Error loading page:", error);
+                }
+            }),
+            new Promise((resolve) => setTimeout(resolve, timeout))
+        ]);
+        // const request = await page.waitForRequest(request => {
+        //     if (allowedTypes.includes(request.resourceType())) {
+        //         console.log(request.url());
+        //     }
+        //     return request.url().includes('https://live-ak.vimeocdn.com/');
+        // }, {timeout: timeout});
+
+        // if (request) {
+        //     finalUrl = request?.url();
+        // }
 
     } catch (error) {
 
@@ -125,8 +144,11 @@ export async function getCanal8URL(timeout = 30000): Promise<string | undefined>
 
     } finally {
 
+        // if (!page.isClosed()) {
         await page.close().catch(e => void e);
-        await browser.close().catch(e => void e);
+        // }
+        // console.log("Before closing browser")
+        await browser.close().catch(e => console.error(e));
         console.log("Get channel 8: end of page load");
 
         return finalUrl;
