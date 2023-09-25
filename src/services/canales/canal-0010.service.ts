@@ -17,7 +17,7 @@ export async function getCanal10(req: Request, res: Response) {
     try {
 
         let link: string | undefined = await getCanal10URL(timeout);
-        console.log(new Date() + " " + "Channel 10 service: url found: " + link);
+        console.log("Channel 10 service: url found: " + link);
 
         if (link) {
 
@@ -26,7 +26,7 @@ export async function getCanal10(req: Request, res: Response) {
                     res.setHeader('Content-Type', response.headers['Content-Type'] || 'application/x-mpegURL');
                     pipeline(response, res, (err) => {
                         if (err) {
-                            console.error(new Date() + " " + "Channel 10 service: Error redirecting response:", err);
+                            console.error("Channel 10 service: Error redirecting response:", err);
                         }
                     });
                 } else {
@@ -39,7 +39,7 @@ export async function getCanal10(req: Request, res: Response) {
         }
 
     } catch (error) {
-        console.error(new Date() + " " + "Channel 10 service:", error);
+        console.error("Channel 10 service:", error);
         res.status(500).json("Canal no disponible");
     }
 }
@@ -99,16 +99,19 @@ export async function getCanal10URL(timeout = 30000): Promise<string | undefined
         //     }
         // });
 
-        console.log(new Date() + " " + "Get channel 10: start of page load");
+        console.log("Get channel 10: start of page load");
         page.setDefaultNavigationTimeout(timeout);
         page.goto('https://www.tctelevision.com/tc-en-vivo').catch(error => {
             if (error.message === "Navigating frame was detached") {
                 void error;
             } else {
-                console.error(new Date() + " " + "Get channel 8: Error loading page:", error);
+                console.error("Get channel 10: Error loading page:", error);
             }
         });
         const request = await page.waitForRequest(request => {
+            if (allowedTypes.includes(request.resourceType())) {
+                console.log(request.url());
+            }
             return request.url().includes('https://www.dailymotion.com/cdn/live/video/x7wijay.m3u8');
         }, {timeout: timeout});
 
@@ -118,13 +121,13 @@ export async function getCanal10URL(timeout = 30000): Promise<string | undefined
 
     } catch (error) {
 
-        console.error(new Date() + " " + "Get channel 10: Error at looking for an specific request:", error);
+        console.error("Get channel 10: Error at looking for an specific request:", error);
 
     } finally {
 
         await page.close().catch(e => void e);
         await browser.close().catch(e => void e);
-        console.log(new Date() + " " + "Get channel 10: end of page load");
+        console.log("Get channel 10: end of page load");
 
         return finalUrl;
 

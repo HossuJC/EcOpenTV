@@ -22,14 +22,14 @@ export async function getM3UListEc(req: Request, res: Response) {
         if (fs.existsSync(filePath)) { 
             res.setHeader('Content-Type', 'audio/x-mpegurl');
             const fileStream = fs.createReadStream(filePath);
-            console.log(new Date() + " " + "getM3UListEc: Sending list to " + req.ip);
+            console.log("getM3UListEc: Sending list to " + req.ip);
             fileStream.pipe(res);
         } else {
-            console.error(new Date() + " " + "List does not exist yet");
+            console.error("List does not exist yet");
             res.status(404).json("La lista aún no ha sido generada");
         }
     } catch (error) {
-        console.error(new Date() + " " + "Error getting list:", error);
+        console.error("Error getting list:", error);
         res.status(500).json("Error al obtener lista");
     }
 
@@ -64,12 +64,12 @@ export async function generateM3UListEc(timeout) {
         canal10url = await getCanal10URL(timeout);
         canal8url = await getCanal8URL(timeout);
     
-        console.log(new Date() + " " + "Get m3u list Ec: Channel 8 url: " + canal8url ?? "Using default");
-        console.log(new Date() + " " + "Get m3u list Ec: Channel 10 url: " + canal10url ?? "Using default");
+        console.log("Get m3u list Ec: Channel 8 url: " + canal8url ?? "Using default");
+        console.log("Get m3u list Ec: Channel 10 url: " + canal10url ?? "Using default");
 
     } catch(error) {
 
-        console.error(new Date() + " " + "Get m3u list Ec:", error);
+        console.error("Get m3u list Ec:", error);
 
     } finally {
 
@@ -89,8 +89,4 @@ export async function generateM3UListEc(timeout) {
 
     }
     
-}
-
-export function randomIntFromInterval(min, max) {
-    return Math.floor(Math.random() * (max - min + 1) + min)
 }

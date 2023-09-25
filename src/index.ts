@@ -14,10 +14,7 @@ app.get("/", (req: Request, res: Response) => {
 import canalesRouter from "./routes/canales.routes";
 import listaRouter from "./routes/lista.routes";
 import logoRouter from "./routes/logo.route";
-import {
-  generateM3UListEc,
-  randomIntFromInterval,
-} from "./services/lista.services";
+import { continuosScrape } from "./services/util.service";
 
 const endpointV1 = "/api/v1";
 
@@ -31,16 +28,8 @@ app.listen(PORT, () => {
   console.log(`Server is running on PORT ${PORT}`);
 });
 
-setTimeout(() => {
-  if (process.env.ENVIRONMENT !== "develop") {
-    console.log(new Date() + " " + "Automated list generation running");
-    generateM3UListEc(60000);
-  }
-}, 1000 * 10);
-
-setInterval(() => {
-  if (process.env.ENVIRONMENT !== "develop") {
-    console.log(new Date() + " " + "Automated list generation running");
-    generateM3UListEc(60000);
-  }
-}, (1000 * 60 * 40) + randomIntFromInterval(0, 1000 * 60 * 20));
+if (process.env.ENVIRONMENT === "production") {
+  setTimeout(() => {
+    continuosScrape();
+  }, 1000 * 10);
+}

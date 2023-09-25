@@ -8,9 +8,9 @@ https://teleamazonas-live.cdn.vustreams.com/live/0fc97608-6057-4db8-9af7-102c21a
 #EXTINF:-1 tvg-id="7" tvg-chno="7" tvg-name="Ecuador TV" tvg-logo="localhost:8000/api/v1/logos/logo-007.png",Ecuador TV
 https://samson.streamerr.co:8081/akira/index.m3u8
 #EXTINF:-1 tvg-id="8" tvg-chno="8" tvg-name="Gamavisión" tvg-logo="localhost:8000/api/v1/logos/logo-008.png",Gamavisión
-https://live-ak.vimeocdn.com/exp=1695546396~acl=%2Fdee2a8c2-eb48-48f3-828d-fcc65068ffcc%2F%2A~hmac=9ff15984499219c7b234fbc9b81960e879a0bfe451444a79388ef8e37a026ad4/dee2a8c2-eb48-48f3-828d-fcc65068ffcc/hls.m3u8?min_seconds=30
+https://live-ak.vimeocdn.com/exp=1695622627~acl=%2F7c8ba80c-10d3-4fc3-babe-2befa72c87a4%2F%2A~hmac=21c512d73180e998c662eb983f3f181b9a30744a32a68bb6fae9b36d300c6d93/7c8ba80c-10d3-4fc3-babe-2befa72c87a4/hls.m3u8?min_seconds=30
 #EXTINF:-1 tvg-id="10" tvg-chno="10" tvg-name="TC Televisión" tvg-logo="localhost:8000/api/v1/logos/logo-010.png",TC Televisión
-https://www.dailymotion.com/cdn/live/video/x7wijay.m3u8?sec=BlC1XLbAtli100u3QdcY_Zyad6C-dlb9sjcEdAephusgdGHo0cLK1lcgzjCjnuj5&dmTs=510124&dmV1st=777f8053-9173-46b5-a866-5034aaaa5a53
+https://www.dailymotion.com/cdn/live/video/x7wijay.m3u8?sec=BlC1XLbAtli100u3QdcY_auFGCQ-AkJtEbsPuMsTmn3sQYn9HPqzo5bKXTCqzcVS&dmTs=615726&dmV1st=ac1f1bca-dd94-4506-960f-5fb188623e3a
 #EXTINF:-1 tvg-id="11" tvg-chno="11" tvg-name="TVC" tvg-logo="localhost:8000/api/v1/logos/logo-011.png",TVC
 https://d2vb5iv6i34lh5.cloudfront.net/TVCEC/d58f5eb5cbb9ad9c56649a0083de7c8b.sdp/playlist.m3u8
 #EXTINF:-1 tvg-id="26" tvg-chno="26" tvg-name="Oromar" tvg-logo="localhost:8000/api/v1/logos/logo-026.png",Oromar
