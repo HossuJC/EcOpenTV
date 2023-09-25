@@ -21,18 +21,20 @@ export async function getCanal10(req: Request, res: Response) {
 
         if (link) {
 
-            https.get(link, (response) => {
-                if (response.statusCode === 200) {
-                    res.setHeader('Content-Type', response.headers['Content-Type'] || 'application/x-mpegURL');
-                    pipeline(response, res, (err) => {
-                        if (err) {
-                            console.error("Channel 10 service: Error redirecting response:", err);
-                        }
-                    });
-                } else {
-                    res.status(500).json("Canal no disponible");
-                }
-            });
+            res.status(200).json(link);
+            
+            // https.get(link, (response) => {
+            //     if (response.statusCode === 200) {
+            //         res.setHeader('Content-Type', response.headers['Content-Type'] || 'application/x-mpegURL');
+            //         pipeline(response, res, (err) => {
+            //             if (err) {
+            //                 console.error("Channel 10 service: Error redirecting response:", err);
+            //             }
+            //         });
+            //     } else {
+            //         res.status(500).json("Canal no disponible");
+            //     }
+            // });
 
         } else {
             throw new Error("No URL available");
@@ -60,19 +62,20 @@ export async function getCanal10URL(timeout = 30000): Promise<string | undefined
             '--disable-accelerated-2d-canvas',
             '--disable-gpu',
             '--disable-dev-shm-usage',
+            '--disable-infobars',
+            '--window-size=1366,768',
         ],
         // executablePath: puppeteer.executablePath('chrome')
         // executablePath: process.env.ENVIRONMENT !== "develop"
         //     ? process.env.PUPPETEER_EXECUTABLE_PATH
         //     : puppeteer.executablePath('chrome')
     });
-    // console.log(process.env.ENVIRONMENT !== "develop");
-    // console.log(process.env.PUPPETEER_EXECUTABLE_PATH);
+    
     const page = await browser.newPage();
 
     try {
 
-        let allowedTypes: string [] = [
+        const allowedTypes: string [] = [
             "xhr",
             "script",
             "document",
@@ -93,15 +96,15 @@ export async function getCanal10URL(timeout = 30000): Promise<string | undefined
             // "stylesheet",
         ];
 
-        // await page.setRequestInterception(true);
-        // page.on('request', async (request) => {
-        //     if (allowedTypes.includes(request.resourceType())) {
-        //         console.log(new Date());
-        //         request.continue();
-        //     } else {
-        //         request.abort();
-        //     }
-        // });
+        await page.setRequestInterception(true);
+        page.on('request', async (request) => {
+            if (allowedTypes.includes(request.resourceType())) {
+                console.log(request.url());
+                request.continue();
+            } else {
+                request.abort();
+            }
+        });
 
         page.on('error', async err => {
             if (!page.isClosed()) {
@@ -116,6 +119,7 @@ export async function getCanal10URL(timeout = 30000): Promise<string | undefined
 
         console.log("Get channel 10: start of page load");
         page.setDefaultNavigationTimeout(timeout);
+
         page.goto('https://www.tctelevision.com/tc-en-vivo').catch(error => {
             if (error.message === "Navigating frame was detached") {
                 void error;
@@ -123,10 +127,8 @@ export async function getCanal10URL(timeout = 30000): Promise<string | undefined
                 console.error("Get channel 10: Error loading page:", error);
             }
         });
+
         const request = await page.waitForRequest(request => {
-            if (allowedTypes.includes(request.resourceType())) {
-                console.log(request.url());
-            }
             return request.url().includes('https://www.dailymotion.com/cdn/live/video/x7wijay.m3u8');
         }, {timeout: timeout});
 
