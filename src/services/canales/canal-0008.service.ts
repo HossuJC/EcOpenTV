@@ -56,6 +56,9 @@ export async function getCanal8URL(timeout = 30000): Promise<string | undefined>
             // "--single-process",
             "--no-zygote",
             "--disable-features=site-per-process",
+            '--ignore-certificate-errors',
+            '--disable-accelerated-2d-canvas',
+            '--disable-gpu',
         ],
         // executablePath: puppeteer.executablePath('chrome')
         // executablePath: process.env.ENVIRONMENT !== "develop"
@@ -114,6 +117,14 @@ export async function getCanal8URL(timeout = 30000): Promise<string | undefined>
             }
         });
 
+        page.on('error', err => {
+            console.log("")
+            console.log("===================================================")
+            console.error(err)
+            console.log("===================================================")
+            console.log("")
+        });
+
         console.log("Get channel 8: start of page load");
         page.setDefaultNavigationTimeout(timeout);
 
@@ -144,10 +155,9 @@ export async function getCanal8URL(timeout = 30000): Promise<string | undefined>
 
     } finally {
 
-        // if (!page.isClosed()) {
+        if (!page.isClosed()) {
         await page.close().catch(e => void e);
-        // }
-        // console.log("Before closing browser")
+        }
         await browser.close().catch(e => console.error(e));
         console.log("Get channel 8: end of page load");
 

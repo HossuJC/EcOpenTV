@@ -56,6 +56,9 @@ export async function getCanal10URL(timeout = 30000): Promise<string | undefined
             // "--single-process",
             "--no-zygote",
             "--disable-features=site-per-process",
+            '--ignore-certificate-errors',
+            '--disable-accelerated-2d-canvas',
+            '--disable-gpu',
         ],
         // executablePath: puppeteer.executablePath('chrome')
         // executablePath: process.env.ENVIRONMENT !== "develop"
@@ -99,6 +102,14 @@ export async function getCanal10URL(timeout = 30000): Promise<string | undefined
         //     }
         // });
 
+        page.on('error', err => {
+            console.log("")
+            console.log("===================================================")
+            console.error(err)
+            console.log("===================================================")
+            console.log("")
+        });
+
         console.log("Get channel 10: start of page load");
         page.setDefaultNavigationTimeout(timeout);
         page.goto('https://www.tctelevision.com/tc-en-vivo').catch(error => {
@@ -108,16 +119,16 @@ export async function getCanal10URL(timeout = 30000): Promise<string | undefined
                 console.error("Get channel 10: Error loading page:", error);
             }
         });
-        // const request = await page.waitForRequest(request => {
-        //     if (allowedTypes.includes(request.resourceType())) {
-        //         console.log(request.url());
-        //     }
-        //     return request.url().includes('https://www.dailymotion.com/cdn/live/video/x7wijay.m3u8');
-        // }, {timeout: timeout});
+        const request = await page.waitForRequest(request => {
+            if (allowedTypes.includes(request.resourceType())) {
+                console.log(request.url());
+            }
+            return request.url().includes('https://www.dailymotion.com/cdn/live/video/x7wijay.m3u8');
+        }, {timeout: timeout});
 
-        // if (request) {
-        //     finalUrl = request?.url();
-        // }
+        if (request) {
+            finalUrl = request?.url();
+        }
 
     } catch (error) {
 
