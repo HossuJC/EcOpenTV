@@ -14,7 +14,7 @@ const ec_list: any = {
             "tvg-chno": 4,
             "tvg-name": "RTS",
             "tvg-logo": (process.env.BASE_URL || 'localhost:8000') + "/api/v1/logos/logo-004.png",
-            "url": "https://d2vb5iv6i34lh5.cloudfront.net/RTSEC/93fc3c04cedad73f1f80aebf11451d53.sdp/playlist.m3u8"
+            "url": "https://d2vb5iv6i34lh5.cloudfront.net/RTSEC/93fc3c04cedad73f1f80aebf11451d53.sdp/playlist.m3u8|Referer=https://www.rts.com.ec/&Origin=https://www.rts.com.ec"
         },
         {
             "#EXTINF": -1,
@@ -47,7 +47,7 @@ const ec_list: any = {
             "tvg-chno": 10,
             "tvg-name": "TC Televisión",
             "tvg-logo": (process.env.BASE_URL || 'localhost:8000') + "/api/v1/logos/logo-010.png",
-            "url": null,
+            "url": (process.env.BASE_URL || 'localhost:8000') + "/api/v1/canales/canal-10.m3u8",
             "default": (process.env.BASE_URL || 'localhost:8000') + "/api/v1/canales/canal-10.m3u8"
         },
         {
@@ -56,7 +56,7 @@ const ec_list: any = {
             "tvg-chno": 11,
             "tvg-name": "TVC",
             "tvg-logo": (process.env.BASE_URL || 'localhost:8000') + "/api/v1/logos/logo-011.png",
-            "url": "https://d2vb5iv6i34lh5.cloudfront.net/TVCEC/d58f5eb5cbb9ad9c56649a0083de7c8b.sdp/playlist.m3u8"
+            "url": "https://d2vb5iv6i34lh5.cloudfront.net/TVCEC/d58f5eb5cbb9ad9c56649a0083de7c8b.sdp/playlist.m3u8|Referer=https://www.tvc.com.ec/&Origin=https://www.tvc.com.ec"
         },
         {
             "#EXTINF": -1,

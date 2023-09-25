@@ -14,9 +14,3 @@ export async function continuosScrape() {
         await new Promise((resolve) => setTimeout(resolve, interval));
     }
 }
-
-export function includesParcial(str: string, srtList: string[]) {
-    srtList.forEach(s => {
-        
-    })
-}

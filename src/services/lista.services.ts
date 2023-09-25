@@ -17,7 +17,7 @@ export async function getM3UListEc(req: Request, res: Response) {
 
     try {
         const fileName = req.url.split('/')[1].split('?')[0];
-        const filePath = path.join(__dirname, '..', 'm3u-lists', fileName);
+        const filePath = path.join(__dirname, '..', '..', 'src', 'm3u-lists', fileName);
     
         if (fs.existsSync(filePath)) { 
             res.setHeader('Content-Type', 'audio/x-mpegurl');
@@ -54,18 +54,18 @@ export async function generateM3UListEc(timeout) {
 
     let m3u: any = ec_list;
     
-    const filePath = path.join(__dirname, '..', 'm3u-lists', 'ec.m3u');
+    const filePath = path.join(__dirname, '..', '..', 'src', 'm3u-lists', 'ec.m3u');
     
     let canal8url;
-    let canal10url;
+    // let canal10url;
 
     try {
 
-        canal10url = await getCanal10URL(timeout);
+        // canal10url = await getCanal10URL(timeout);
         canal8url = await getCanal8URL(timeout);
     
         console.log("Get m3u list Ec: Channel 8 url: " + canal8url ?? "Using default");
-        console.log("Get m3u list Ec: Channel 10 url: " + canal10url ?? "Using default");
+        // console.log("Get m3u list Ec: Channel 10 url: " + canal10url ?? "Using default");
 
     } catch(error) {
 
@@ -77,7 +77,7 @@ export async function generateM3UListEc(timeout) {
             if (m3u['#EXTM3U'][i]['tvg-id'] === '8') {
                 m3u['#EXTM3U'][i]['url'] = canal8url || 'http://null';
             } else if (m3u['#EXTM3U'][i]['tvg-id'] === '10') {
-                m3u['#EXTM3U'][i]['url'] = canal10url || 'http://null';
+                m3u['#EXTM3U'][i]['url'] = m3u['#EXTM3U'][i]['default'];
                 break;
             }
         }
