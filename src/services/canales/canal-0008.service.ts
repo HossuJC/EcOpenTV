@@ -1,5 +1,7 @@
 import { Request, Response } from 'express';
 import puppeteer from 'puppeteer';
+import path from 'path';
+import fs from 'fs';
 // import https from 'https';
 // import { pipeline } from 'stream';
 import "dotenv/config";
@@ -16,8 +18,29 @@ export async function getCanal8(req: Request, res: Response) {
 
     try {
 
-        let link: string | undefined = await getCanal8URL(timeout);
-        console.log("Channel 8 service: url found: " + link);
+        const filePath_canal8_link = path.join(__dirname, '..', '..', 'm3u-lists', 'canal-8.link');
+
+        let link = await getCanal8URL(timeout);
+        if (!link) link = await getCanal8URL(timeout, true);
+
+        if (link) {
+            fs.writeFileSync(filePath_canal8_link, link);
+            console.log("Generate m3u list: Channel 8 link found and written to storage: " + link);
+        } else {
+            console.log("Get channel 8: Link not found on internet, trying to get it from storage");
+            if (fs.existsSync(filePath_canal8_link)) {
+                fs.readFile(filePath_canal8_link, (err, data) => {
+                    if (err) {
+                        console.error("Get channel 8: Error reading storage:" + err);
+                    } else {
+                        link = data.toString();
+                        console.log("Get channel 8: Link found: " + link);
+                    }
+                });
+            } else {
+                console.log("Get channel 8: Link not found on storage");
+            }
+        }
 
         if (link) {
 
@@ -37,17 +60,18 @@ export async function getCanal8(req: Request, res: Response) {
             // });
 
         } else {
-            throw new Error("No URL available");
+            res.status(404).json("Canal no disponible");
         }
 
     } catch (error) {
-        console.error("Channel 8 service:", error);
+        console.error("Get channel 8:", error);
         res.status(500).json("Canal no disponible");
     }
 }
 
-export async function getCanal8URL(timeout = 30000): Promise<string | undefined> {
+export async function getCanal8URL(timeout = 30000, alter = false): Promise<string | undefined> {
     let finalUrl;
+    const urlToScrape = !alter ? 'https://www.gamavision.com.ec/' : 'https://vimeo.com/event/3564149/embed';
     const browser = await puppeteer.launch({
         headless: 'new',
         channel: 'chrome',
@@ -70,12 +94,12 @@ export async function getCanal8URL(timeout = 30000): Promise<string | undefined>
         //     ? process.env.PUPPETEER_EXECUTABLE_PATH
         //     : puppeteer.executablePath('chrome')
     });
-    
+
     const page = await browser.newPage();
 
     try {
 
-        const blockedTypes: string [] = [
+        const blockedTypes: string[] = [
             // "xhr",
             // "script",
             // "document",
@@ -96,7 +120,7 @@ export async function getCanal8URL(timeout = 30000): Promise<string | undefined>
             "other",
         ];
 
-        const blockedUrls: string [] = [
+        const blockedUrls: string[] = [
             "https://www.gamavision.com.ec/wp-",
             "https://www.google-analytics.com/",
             "https://connect.facebook.net/",
@@ -111,6 +135,10 @@ export async function getCanal8URL(timeout = 30000): Promise<string | undefined>
             "https://player.vimeo.com/static/proxy.html",
             "https://f.vimeocdn.com/js_opt/app/embed/_next/static/s",
             "https://f.vimeocdn.com/js_opt/app/embed/_next/static/css/",
+
+
+
+
         ];
 
         await page.setRequestInterception(true);
@@ -118,7 +146,7 @@ export async function getCanal8URL(timeout = 30000): Promise<string | undefined>
             if (blockedTypes.includes(request.resourceType()) || blockedUrls.some(e => request.url().includes(e))) {
                 request.abort();
             } else {
-                console.log(request.url());
+                console.log("Get channel 8 url: Loading " + request.url());
                 request.continue();
             }
         });
@@ -127,43 +155,41 @@ export async function getCanal8URL(timeout = 30000): Promise<string | undefined>
             if (!page.isClosed()) {
                 await page.close().catch(e => void e);
             }
-            console.log("")
-            console.log("===================================================")
-            console.error(err)
-            console.log("===================================================")
-            console.log("")
+            console.error("Get channel 8 url: Error found in page:" + err);
         });
 
-        console.log("Get channel 8: start of page load");
         page.setDefaultNavigationTimeout(timeout);
 
-        page.goto('https://www.gamavision.com.ec/').catch(error => {
-            if (error.message === "Navigating frame was detached") {
-                void error;
-            } else {
-                console.error("Get channel 8: Error loading page:", error);
-            }
+        console.log("Get channel 8 url: Start of page load (" + urlToScrape + ")");
+        page.goto(urlToScrape).catch(error => {
+            throw error;
         });
 
         const request = await page.waitForRequest(request => {
             return request.url().includes('https://live-ak.vimeocdn.com/');
-        }, {timeout: timeout});
+        }, { timeout: timeout });
 
         if (request) {
             finalUrl = request?.url();
         }
 
-    } catch (error) {
-
-        console.error("Get channel 8: Error at looking for an specific request:", error);
+    } catch (error: any) {
+        
+        if (error.message.includes("Navigating frame was detached")) {
+            void error;
+        } if (error.title.includes("TimeoutError") || error.message.includes("TimeoutError")) {
+            console.log("Get channel 8 url: Timeout of " + timeout + " ms exceeded");
+        } else {
+            console.error("Get channel 8 url: Error:", error.message);
+        }
 
     } finally {
 
         if (!page.isClosed()) {
-        await page.close().catch(e => void e);
+            await page.close().catch(e => void e);
         }
         await browser.close().catch(e => void e);
-        console.log("Get channel 8: end of page load");
+        console.log("Get channel 8 url: End of page load (" + urlToScrape + ")");
 
         return finalUrl;
 

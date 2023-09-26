@@ -14,7 +14,7 @@ app.get("/", (req: Request, res: Response) => {
 import canalesRouter from "./routes/canales.routes";
 import listaRouter from "./routes/lista.routes";
 import logoRouter from "./routes/logo.route";
-import { continuosScrape } from "./services/util.service";
+import { startContinuosScrape } from "./services/util.service";
 
 const endpointV1 = "/api/v1";
 
@@ -30,6 +30,6 @@ app.listen(PORT, () => {
 
 if (process.env.ENVIRONMENT === "production") {
   setTimeout(() => {
-    continuosScrape();
+    startContinuosScrape();
   }, 1000 * 10);
 }

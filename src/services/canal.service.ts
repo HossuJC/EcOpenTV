@@ -6,7 +6,7 @@ export async function getCanal(req: Request, res: Response) {
 
     try {
         const fileName = req.params.canal;
-        const filePath = path.join(__dirname, '..', '..', 'src', 'm3u-lists', fileName);
+        const filePath = path.join(__dirname, '..', 'm3u-lists', fileName);
 
         if (fs.existsSync(filePath)) {
             res.setHeader('Content-Type', 'application/vnd.apple.mpegurl');

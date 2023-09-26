@@ -9,4 +9,5 @@ COPY package*.json ./
 RUN npm ci
 COPY . .
 RUN npm run build
+RUN npm run copy-lists
 CMD [ "node", "dist/index.js" ]

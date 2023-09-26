@@ -1,5 +1,7 @@
 import { Request, Response } from 'express';
 import puppeteer from 'puppeteer';
+import path from 'path';
+import fs from 'fs';
 // import https from 'https';
 // import { pipeline } from 'stream';
 import "dotenv/config";
@@ -16,13 +18,34 @@ export async function getCanal10(req: Request, res: Response) {
 
     try {
 
-        let link: string | undefined = await getCanal10URL(timeout);
-        console.log("Channel 10 service: url found: " + link);
+        const filePath_canal8_link = path.join(__dirname, '..', '..', 'm3u-lists', 'canal-10.link');
+
+        let link = await getCanal10URL(timeout);
+        // if (!link) link = await getCanal10URL(timeout, true);
+
+        if (link) {
+            fs.writeFileSync(filePath_canal8_link, link);
+            console.log("Generate m3u list: Channel 10 link found and written to storage: " + link);
+        } else {
+            console.log("Get channel 10: Link not found on internet, trying to get it from storage");
+            if (fs.existsSync(filePath_canal8_link)) {
+                fs.readFile(filePath_canal8_link, (err, data) => {
+                    if (err) {
+                        console.error("Get channel 10: Error reading storage:" + err);
+                    } else {
+                        link = data.toString();
+                        console.log("Get channel 10: Link found: " + link);
+                    }
+                });
+            } else {
+                console.log("Get channel 10: Link not found on storage");
+            }
+        }
 
         if (link) {
 
             res.status(200).json(link);
-            
+
             // https.get(link, (response) => {
             //     if (response.statusCode === 200) {
             //         res.setHeader('Content-Type', response.headers['Content-Type'] || 'application/x-mpegURL');
@@ -37,17 +60,18 @@ export async function getCanal10(req: Request, res: Response) {
             // });
 
         } else {
-            throw new Error("No URL available");
+            res.status(404).json("Canal no disponible");
         }
 
     } catch (error) {
-        console.error("Channel 10 service:", error);
+        console.error("Get channel 10:", error);
         res.status(500).json("Canal no disponible");
     }
 }
 
 export async function getCanal10URL(timeout = 30000): Promise<string | undefined> {
     let finalUrl;
+    const urlToScrape = 'https://www.tctelevision.com/tc-en-vivo';
     const browser = await puppeteer.launch({
         headless: 'new',
         channel: 'chrome',
@@ -70,12 +94,12 @@ export async function getCanal10URL(timeout = 30000): Promise<string | undefined
         //     ? process.env.PUPPETEER_EXECUTABLE_PATH
         //     : puppeteer.executablePath('chrome')
     });
-    
+
     const page = await browser.newPage();
 
     try {
 
-        const blockedTypes: string [] = [
+        const blockedTypes: string[] = [
             // "xhr",
             // "script",
             // "document",
@@ -96,7 +120,7 @@ export async function getCanal10URL(timeout = 30000): Promise<string | undefined
             "stylesheet",
         ];
 
-        const blockedUrls: string [] = [
+        const blockedUrls: string[] = [
             "https://code.jquery.com/",
             "https://securepubads.g.doubleclick.net/",
             "https://www.gstatic.com/",
@@ -122,7 +146,7 @@ export async function getCanal10URL(timeout = 30000): Promise<string | undefined
             if (blockedTypes.includes(request.resourceType()) || blockedUrls.some(e => request.url().includes(e))) {
                 request.abort();
             } else {
-                console.log(request.url());
+                console.log("Get channel 10 url: Loading " + request.url());
                 request.continue();
             }
         });
@@ -130,44 +154,42 @@ export async function getCanal10URL(timeout = 30000): Promise<string | undefined
         page.on('error', async err => {
             if (!page.isClosed()) {
                 await page.close().catch(e => void e);
-                }
-            console.log("")
-            console.log("===================================================")
-            console.error(err)
-            console.log("===================================================")
-            console.log("")
+            }
+            console.error("Get channel 10 url: Error found in page:" + err);
         });
 
-        console.log("Get channel 10: start of page load");
         page.setDefaultNavigationTimeout(timeout);
 
-        page.goto('https://www.tctelevision.com/tc-en-vivo').catch(error => {
-            if (error.message === "Navigating frame was detached") {
-                void error;
-            } else {
-                console.error("Get channel 10: Error loading page:", error);
-            }
+        console.log("Get channel 10 url: Start of page load (" + urlToScrape + ")");
+        page.goto(urlToScrape).catch(error => {
+            throw error;
         });
 
         const request = await page.waitForRequest(request => {
             return request.url().includes('https://www.dailymotion.com/cdn/live/video/x7wijay.m3u8');
-        }, {timeout: timeout});
+        }, { timeout: timeout });
 
         if (request) {
             finalUrl = request?.url();
         }
 
-    } catch (error) {
-
-        console.error("Get channel 10: Error at looking for an specific request:", error);
+    } catch (error: any) {
+        
+        if (error.message.includes("Navigating frame was detached")) {
+            void error;
+        } if (error.title.includes("TimeoutError") || error.message.includes("TimeoutError")) {
+            console.log("Get channel 10 url: Timeout of " + timeout + " ms exceeded");
+        } else {
+            console.error("Get channel 10 url: Error:", error.message);
+        }
 
     } finally {
 
         if (!page.isClosed()) {
-        await page.close().catch(e => void e);
+            await page.close().catch(e => void e);
         }
         await browser.close().catch(e => void e);
-        console.log("Get channel 10: end of page load");
+        console.log("Get channel 10 url: End of page load (" + urlToScrape + ")");
 
         return finalUrl;
 
