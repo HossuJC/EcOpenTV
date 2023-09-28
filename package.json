@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "tsc",
-    "copy-lists": "cp -r ./src/m3u-lists ./dist/m3u-lists",
+    "copy-channels": "cp -r ./src/channels ./dist/channels",
     "start": "ts-node src/index.ts",
     "dev": "ts-node-dev --respawn --transpile-only src/index.ts"
   },

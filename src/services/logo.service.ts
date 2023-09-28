@@ -8,17 +8,17 @@ export async function getLogo(req: Request, res: Response) {
         const fileName = req.params.logo;
         const filePath = path.join(__dirname, '..', '..', 'src', 'assets', fileName);
 
-        if (fs.existsSync(filePath)) {
+        if (fileName && fileName.includes(".png") && fs.existsSync(filePath)) {
             res.setHeader('Content-Type', 'image/png');
             const fileStream = fs.createReadStream(filePath);
             fileStream.pipe(res);
         } else {
             console.error("Logo does not exist");
-            res.status(404).json("El logo no existe");
+            res.status(404).send("El logo no existe");
         }
     } catch (error) {
         console.error("Error getting logo:", error);
-        res.status(500).json("Error al obtener logo");
+        res.status(500).send("Error al obtener logo");
     }
 
 }
