@@ -55,16 +55,25 @@ export async function generateCanal(req: Request, res: Response) {
 
 export async function generateCanales(req: Request, res: Response) {
 
+    let respuesta = await generateCanalesInterno(Number(req.query.timeout));
+    if (respuesta && respuesta?.status && respuesta?.message) {
+        res.status(respuesta?.status).send(respuesta?.message)
+    } else {
+        res.status(500).send("Error al generar contenido del canal");
+    }
+
+}
+
+export async function generateCanalesInterno(timeout: number) {
+
     let canalesFallidos: string[] = [];
     let currentChannel: string = "none";
 
     try {
-        
-        let timeout = req.query.timeout ? Number(req.query.timeout) : 30000;
 
         for (let canalObject of ec["#EXTM3U"]) {
             currentChannel = canalObject["tvg-id"];
-            let result = await handleCanalSearch(timeout, canalObject);
+            let result = await handleCanalSearch(timeout ?? 30000, canalObject);
             if (!result) {
                 canalesFallidos.push(canalObject["tvg-id"]);
             }
@@ -72,18 +81,18 @@ export async function generateCanales(req: Request, res: Response) {
 
         if (canalesFallidos.length === 0) {
             console.log("Generate channels: Finished with state SUCCESS");
-            res.status(200).send("Archivos de canales modificados correctamente");
+            return {status: 200, message: "Archivos de canales modificados correctamente"};
         } else {
             console.log("Generate channels: Finished with state FAILED");
             console.log("Generate channels: Channels failed: " + canalesFallidos.toString().replaceAll(",", ", "));
-            res.status(500).send("Archivo de canal no modificado para: " + canalesFallidos.toString().replaceAll(",", ", "));
+            return {status: 500, message: "Archivo de canal no modificado para: " + canalesFallidos.toString().replaceAll(",", ", ")};
         }
 
     } catch (error) {
         console.log("Generate channels: Finished with state FAILED:" + error );
         console.log("Generate channels: Last attempt: Channel" + currentChannel );
         console.log("Generate channels: Channels failed: " + canalesFallidos.toString().replaceAll(",", ", "));
-        res.status(500).send("Error al generar contenido del canal " + req.params.canal + ":" + error );
+        return {status: 500, message: "Error al generar contenido de los canales:" + error};
     }
 
 }

@@ -10,4 +10,5 @@ RUN npm ci
 COPY . .
 RUN npm run build
 RUN npm run copy-channels
+RUN npm run create-directory
 CMD [ "node", "dist/index.js" ]

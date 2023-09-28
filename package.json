@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "tsc",
+    "create-directory": "mkdir -p ./dist/channels ./dist/m3u-lists",
     "copy-channels": "cp -r ./src/channels ./dist/channels",
     "start": "ts-node src/index.ts",
     "dev": "ts-node-dev --respawn --transpile-only src/index.ts"
