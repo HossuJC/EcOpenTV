@@ -10,7 +10,19 @@ import { handleCanalSearch } from "./canal.service";
 export function convertJsonToM3u(jsonInput: any) {
     let result = "#EXTM3U\n";
     for (const item of jsonInput["#EXTM3U"]) {
-        result += `#EXTINF:${item["#EXTINF"]} tvg-id="${item["tvg-id"]}" tvg-chno="${item["tvg-chno"]}" tvg-name="${item["tvg-name"]}" tvg-logo="${item["tvg-logo"]}",${item["tvg-name"]}\n${item["list-url"]}\n`;
+        let validUrl = "http://null";
+        if (item["strategy"] === "direct") {
+            validUrl = item["url"]
+        } else if (item["strategy"] === "deep") {
+            validUrl = item["list-url"]
+        } else if (item["strategy"] === "shallow") {
+            let fileNameLink = `canal-${item["tvg-id"]}.link`
+            let filePathlink = path.join(__dirname, '..', 'channels', fileNameLink);
+            if (fs.existsSync(filePathlink)) {
+                validUrl = fs.readFileSync(filePathlink, 'utf8');
+            }
+        }
+        result += `#EXTINF:${item["#EXTINF"]} tvg-id="${item["tvg-id"]}" tvg-chno="${item["tvg-chno"]}" tvg-name="${item["tvg-name"]}" tvg-logo="${item["tvg-logo"]}",${item["tvg-name"]}\n${validUrl}\n`;
     }
     return result;
 }

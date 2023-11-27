@@ -34,8 +34,8 @@ setTimeout(() => {
   generateList();
 }, 1000 * 2);
 
-if (process.env.ENVIRONMENT === "production") {
+// if (process.env.ENVIRONMENT === "production") {
   setTimeout(() => {
     startContinuosScrape();
-  }, 1000 * 15);
-}
+  }, 1000 * 4);
+// }

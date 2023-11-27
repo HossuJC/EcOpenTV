@@ -162,17 +162,15 @@ export async function getCanalURL(timeout: number, channelId: string, options: {
     
             if (request) {
                 finalUrl = request.url();
-
             }
     
         } catch (error: any) {
-            console.log("ekisde")
             if (error.message.includes("Navigating frame was detached")) {
                 void error;
             } if (error.toString().includes("TimeoutError")) {
                 console.log(`Get channel ${channelId} url: Timeout of ${timeout} ms exceeded`);
             } else {
-                console.error(`Get channel ${channelId} url: Error:${error.message}`);
+                console.error(`Get channel ${channelId} url: Error: ${error.message}`);
             }
     
         } finally {
