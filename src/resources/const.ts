@@ -167,8 +167,8 @@ export const ec: any = {
                     // "https://static1.dmcdn.net/playerv5/dmp.locale",
                     "https://static1.dmcdn.net/playerv5/dmp.advertising",
                     "https://static1.dmcdn.net/playerv5/dmp.photon_player",
-                    "https://ad.lkqd.net/",
-                    "https://v.lkqd.net/",
+                    "lkqd.net/",
+                    "vidoomy.com/"
                 ],
             }
         },
