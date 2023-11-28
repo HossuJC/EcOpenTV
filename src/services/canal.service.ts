@@ -46,7 +46,7 @@ export async function handleCanalSearch(timeout: number = 30000, channelObject: 
 
     console.log(`Handle search of channel ${channelObject["tvg-id"]}`);
 
-    if (channelObject["strategy"] === 'direct' || channelObject["strategy"] === 'shallow' || channelObject["strategy"] === 'deep') {
+    if (channelObject["strategy"] === 'direct' || channelObject["strategy"] === 'shallow' || channelObject["strategy"].includes('deep')) {
         console.log(`Handle search of channel ${channelObject["tvg-id"]}: Using strategy: ${channelObject["strategy"]}`);
 
         url = channelObject["strategy"] === 'direct' ? channelObject["url"] : await getCanalURL(timeout, channelObject["tvg-id"], channelObject["options"]);
@@ -161,13 +161,24 @@ export async function getCanalURL(timeout: number, channelId: string, options: {
                     console.error(`Get channel ${channelId} url: Error:${error.message}`);
                 }
             });
-    
-            const request = await page.waitForRequest(request => {
-                return request.url().includes(options.target);
-            }, { timeout: timeout });
-    
-            if (request) {
-                finalUrl = request.url();
+
+            if (channelId === '010') {
+                const response = await page.waitForResponse(response => {
+                    return response.url().includes(options.target);
+                }, { timeout: timeout });
+        
+                if (response) {
+                    let r = await response.json();
+                    finalUrl = r?.qualities?.auto[0]?.url;
+                }
+            } else {
+                const request = await page.waitForRequest(request => {
+                    return request.url().includes(options.target);
+                }, { timeout: timeout });
+        
+                if (request) {
+                    finalUrl = request.url();
+                }
             }
     
         } catch (error: any) {

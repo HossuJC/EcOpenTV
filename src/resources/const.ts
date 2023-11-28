@@ -127,7 +127,7 @@ export const ec: any = {
             "strategy": "deep",
             "options": {
                 "webpages": ["https://www.tctelevision.com/tc-en-vivo"],
-                "target": "https://www.dailymotion.com/cdn/live/video/x7wijay.m3u8",
+                "target": "https://www.dailymotion.com/player/metadata/video/x7wijay",
                 "blockedTypes": [
                     // "xhr",
                     // "script",
