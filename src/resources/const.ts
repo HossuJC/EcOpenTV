@@ -180,7 +180,7 @@ export const ec: any = {
             "tvg-chno": 11,
             "tvg-name": "TVC",
             "tvg-logo": (process.env.BASE_URL || "localhost:8000") + "/api/v1/logos/logo-011.png",
-            "url": "https://d2vb5iv6i34lh5.cloudfront.net/TVCEC/d58f5eb5cbb9ad9c56649a0083de7c8b.sdp/playlist.m3u8|Referer=https://www.tvc.com.ec/&Origin=https://www.tvc.com.ec",
+            "url": "http://177.234.230.226:8010/play/a028/index.m3u8",
             "list-url": (process.env.BASE_URL || "localhost:8000") + "/api/v1/canales/canal-011.m3u8",
             "strategy": "direct",
             "options": {

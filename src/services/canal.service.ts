@@ -4,6 +4,7 @@ import https from "https";
 import path from 'path';
 import fs from 'fs';
 import { channel_template } from '../resources/const';
+import { checkLastRunAndScrape } from './util.service';
 
 export async function getCanal(req: Request, res: Response) {
 
@@ -19,6 +20,11 @@ export async function getCanal(req: Request, res: Response) {
             console.error("Channel does not exist");
             res.status(404).send("El canal no esta disponible");
         }
+        
+        if (process.env.STRATEGY === "trigger") {
+            checkLastRunAndScrape();
+        }
+
     } catch (error) {
         console.error("Error getting channel:", error);
         res.status(500).send("Error al obtener canal");

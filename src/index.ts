@@ -14,8 +14,8 @@ app.get("/", (req: Request, res: Response) => {
 import canalesRouter from "./routes/canales.routes";
 import listaRouter from "./routes/lista.routes";
 import logoRouter from "./routes/logo.route";
-import { startContinuosScrape } from "./services/util.service";
 import { generateList, getLists } from "./services/lista.services";
+import { startContinuosScrape, firstScrape } from "./services/util.service";
 
 const endpointV1 = "/api/v1";
 
@@ -28,14 +28,20 @@ const PORT = process.env.PORT || 8000;
 
 app.listen(PORT, () => {
   console.log(`Server is running on PORT ${PORT}`);
+  if (process.env.STRATEGY) {
+    console.log("Starting service with strategy: " + process.env.STRATEGY);
+  } else {
+    console.log("Starting service without strategy: No lists update will be possible");
+  }
 });
 
 setTimeout(() => {
   generateList();
+  firstScrape();
 }, 1000 * 2);
 
-// if (process.env.ENVIRONMENT === "production") {
+if (process.env.ENVIRONMENT === "production" && process.env.STRATEGY === "automated") {
   setTimeout(() => {
     startContinuosScrape();
-  }, 1000 * 4);
-// }
+  }, 1000 * 10);
+}
