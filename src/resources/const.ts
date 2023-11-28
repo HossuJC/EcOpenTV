@@ -72,7 +72,7 @@ export const ec: any = {
             "tvg-chno": 8,
             "tvg-name": "Gamavisión",
             "tvg-logo": (process.env.BASE_URL || "localhost:8000") + "/api/v1/logos/logo-008.png",
-            "url": "https://edge1o.live.opencaster.com/caster/HiybfxHnmbcF.m3u8|Referer=https://www.opencaster.com/&Origin=https://www.opencaster.com",
+            "url": "http://177.234.230.226:8010/play/a02d/index.m3u8",
             "list-url": (process.env.BASE_URL || "localhost:8000") + "/api/v1/canales/canal-008.m3u8",
             "strategy": "direct",
             "options": {

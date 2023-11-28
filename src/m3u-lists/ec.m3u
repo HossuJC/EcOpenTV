@@ -8,7 +8,7 @@ https://teleamazonas-live.cdn.vustreams.com/live/0fc97608-6057-4db8-9af7-102c21a
 #EXTINF:-1 tvg-id="007" tvg-chno="7" tvg-name="Ecuador TV" tvg-logo="https://ecopentv.3.us-1.fl0.io/api/v1/logos/logo-007.png",Ecuador TV
 https://samson.streamerr.co:8081/akira/index.m3u8
 #EXTINF:-1 tvg-id="008" tvg-chno="8" tvg-name="Gamavisión" tvg-logo="https://ecopentv.3.us-1.fl0.io/api/v1/logos/logo-008.png",Gamavisión
-https://edge1o.live.opencaster.com/caster/HiybfxHnmbcF.m3u8|Referer=https://www.opencaster.com/&Origin=https://www.opencaster.com
+http://177.234.230.226:8010/play/a02d/index.m3u8
 #EXTINF:-1 tvg-id="010" tvg-chno="10" tvg-name="TC Televisión" tvg-logo="https://ecopentv.3.us-1.fl0.io/api/v1/logos/logo-010.png",TC Televisión
 https://ecopentv.3.us-1.fl0.io/api/v1/canales/canal-010.m3u8
 #EXTINF:-1 tvg-id="011" tvg-chno="11" tvg-name="TVC" tvg-logo="https://ecopentv.3.us-1.fl0.io/api/v1/logos/logo-011.png",TVC
