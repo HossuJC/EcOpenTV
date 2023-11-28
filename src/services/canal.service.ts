@@ -171,7 +171,7 @@ export async function getCanalURL(timeout: number, channelId: string, options: {
                     let r = await response.json();
                     console.log("")
                     console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
-                    console.log(r?.qualities)
+                    console.log(r)
                     console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
                     console.log("")
                     finalUrl = r?.qualities?.auto[0]?.url;
