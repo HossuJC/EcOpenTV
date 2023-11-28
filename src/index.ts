@@ -35,10 +35,12 @@ app.listen(PORT, () => {
   }
 });
 
-setTimeout(() => {
-  generateList();
-  firstScrape();
-}, 1000 * 2);
+if (process.env.STRATEGY !== "automated") {
+  setTimeout(() => {
+    generateList();
+    firstScrape();
+  }, 1000 * 2);
+}
 
 if (process.env.ENVIRONMENT === "production" && process.env.STRATEGY === "automated") {
   setTimeout(() => {
