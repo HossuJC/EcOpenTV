@@ -83,8 +83,6 @@ export async function generateCanalesInterno(timeout: number) {
 
     try {
 
-        fs.writeFileSync(lastRunPath, Date.now().toString());
-
         for (let canalObject of ec["#EXTM3U"]) {
             currentChannel = canalObject["tvg-id"];
             let result = await handleCanalSearch(timeout ?? 30000, canalObject);
@@ -94,6 +92,7 @@ export async function generateCanalesInterno(timeout: number) {
         }
 
         if (canalesFallidos.length === 0) {
+            fs.writeFileSync(lastRunPath, Date.now().toString());
             console.log("Generate channels: Finished with state SUCCESS");
             return {status: 200, message: "Archivos de canales modificados correctamente"};
         } else {

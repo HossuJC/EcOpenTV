@@ -109,6 +109,9 @@ export async function getCanalContent(url: string, channelId: string): Promise<s
 
 export async function getCanalURL(timeout: number, channelId: string, options: {strategy: string, webpages: string[], target: string, blockedTypes: string[], blockedUrls: string[], }): Promise<string | undefined> {
     let finalUrl;
+
+    // const proxyServer = process.env.PROXY || '181.39.76.247:999';
+    // const proxyServer = '65.18.114.254:55443';
     
     for (let webpage of options.webpages) {
         const browser = await puppeteer.launch({
@@ -127,13 +130,15 @@ export async function getCanalURL(timeout: number, channelId: string, options: {
                 '--disable-dev-shm-usage',
                 '--disable-infobars',
                 '--window-size=1366,768',
+                // `--proxy-server=${proxyServer}`
             ],
         });
     
         const page = await browser.newPage();
     
         try {
-    
+
+            // await page.setGeolocation({ latitude: -1.8312, longitude: -78.1834 });
             await page.setRequestInterception(true);
             page.on('request', async (request) => {
                 if (options.blockedTypes.includes(request.resourceType()) || options.blockedUrls.some(e => request.url().includes(e))) {
@@ -169,11 +174,11 @@ export async function getCanalURL(timeout: number, channelId: string, options: {
         
                 if (response) {
                     let r = await response.json();
-                    console.log("")
-                    console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
-                    console.log(r)
-                    console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
-                    console.log("")
+                    // console.log("")
+                    // console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
+                    // console.log(r)
+                    // console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
+                    // console.log("")
                     finalUrl = r?.qualities?.auto[0]?.url;
                 }
             } else {
