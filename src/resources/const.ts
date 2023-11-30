@@ -4,12 +4,12 @@ export const ec: any = {
     "#EXTM3U": [
         {
             "#EXTINF": -1,
-            "tvg-id": "002",
+            "tvg-id": "182dtv.ec",
             "tvg-chno": 2,
             "tvg-name": "Ecuavisa",
-            "tvg-logo": (process.env.BASE_URL || "localhost:8000") + "/api/v1/logos/logo-002.png",
+            "tvg-logo": (process.env.BASE_URL || "localhost:8000") + "/api/v1/logos/182dtv.ec.png",
             "url": "https://redirector.rudo.video/hls-video/c54ac2799874375c81c1672abb700870537c5223/ecuavisa/ecuavisa.smil/playlist.m3u8?did=b13237840961464fec587dacfe",
-            "list-url": (process.env.BASE_URL || "localhost:8000") + "/api/v1/canales/canal-002.m3u8",
+            "list-url": (process.env.BASE_URL || "localhost:8000") + "/api/v1/canales/182dtv.ec.m3u8",
             "strategy": "direct",
             "options": {
                 "webpages": [],
@@ -20,12 +20,12 @@ export const ec: any = {
         },
         {
             "#EXTINF": -1,
-            "tvg-id": "004",
+            "tvg-id": "185dtv.ec",
             "tvg-chno": 4,
             "tvg-name": "RTS",
-            "tvg-logo": (process.env.BASE_URL || "localhost:8000") + "/api/v1/logos/logo-004.png",
+            "tvg-logo": (process.env.BASE_URL || "localhost:8000") + "/api/v1/logos/185dtv.ec.png",
             "url": "https://d2vb5iv6i34lh5.cloudfront.net/RTSEC/93fc3c04cedad73f1f80aebf11451d53.sdp/playlist.m3u8|Referer=https://www.rts.com.ec/&Origin=https://www.rts.com.ec",
-            "list-url": (process.env.BASE_URL || "localhost:8000") + "/api/v1/canales/canal-004.m3u8",
+            "list-url": (process.env.BASE_URL || "localhost:8000") + "/api/v1/canales/185dtv.ec.m3u8",
             "strategy": "direct",
             "options": {
                 "webpages": [],
@@ -36,12 +36,12 @@ export const ec: any = {
         },
         {
             "#EXTINF": -1,
-            "tvg-id": "005",
+            "tvg-id": "180dtv.ec",
             "tvg-chno": 5,
             "tvg-name": "Teleamazonas",
-            "tvg-logo": (process.env.BASE_URL || "localhost:8000") + "/api/v1/logos/logo-005.png",
+            "tvg-logo": (process.env.BASE_URL || "localhost:8000") + "/api/v1/logos/logo-180dtv.ec.png",
             "url": "https://teleamazonas-live.cdn.vustreams.com/live/0fc97608-6057-4db8-9af7-102c21ac18af/live.isml/0fc97608-6057-4db8-9af7-102c21ac18af.m3u8",
-            "list-url": (process.env.BASE_URL || "localhost:8000") + "/api/v1/canales/canal-005.m3u8",
+            "list-url": (process.env.BASE_URL || "localhost:8000") + "/api/v1/canales/canal-180dtv.ec.m3u8",
             "strategy": "direct",
             "options": {
                 "webpages": [],
@@ -52,12 +52,12 @@ export const ec: any = {
         },
         {
             "#EXTINF": -1,
-            "tvg-id": "007",
+            "tvg-id": "187dtv.ec",
             "tvg-chno": 7,
             "tvg-name": "Ecuador TV",
-            "tvg-logo": (process.env.BASE_URL || "localhost:8000") + "/api/v1/logos/logo-007.png",
+            "tvg-logo": (process.env.BASE_URL || "localhost:8000") + "/api/v1/logos/logo-187dtv.ec.png",
             "url": "https://samson.streamerr.co:8081/akira/index.m3u8",
-            "list-url": (process.env.BASE_URL || "localhost:8000") + "/api/v1/canales/canal-007.m3u8",
+            "list-url": (process.env.BASE_URL || "localhost:8000") + "/api/v1/canales/canal-187dtv.ec.m3u8",
             "strategy": "direct",
             "options": {
                 "webpages": [],
@@ -68,12 +68,12 @@ export const ec: any = {
         },
         {
             "#EXTINF": -1,
-            "tvg-id": "008",
+            "tvg-id": "183dtv.ec",
             "tvg-chno": 8,
             "tvg-name": "Gamavisión",
-            "tvg-logo": (process.env.BASE_URL || "localhost:8000") + "/api/v1/logos/logo-008.png",
+            "tvg-logo": (process.env.BASE_URL || "localhost:8000") + "/api/v1/logos/logo-183dtv.ec.png",
             "url": "http://177.234.230.226:8010/play/a02d/index.m3u8",
-            "list-url": (process.env.BASE_URL || "localhost:8000") + "/api/v1/canales/canal-008.m3u8",
+            "list-url": (process.env.BASE_URL || "localhost:8000") + "/api/v1/canales/canal-183dtv.ec.m3u8",
             "strategy": "direct",
             "options": {
                 "webpages": ["https://www.gamavision.com.ec/", "https://vimeo.com/event/3564149/embed"],
@@ -118,16 +118,16 @@ export const ec: any = {
         },
         {
             "#EXTINF": -1,
-            "tvg-id": "010",
+            "tvg-id": "181dtv.ec",
             "tvg-chno": 10,
             "tvg-name": "TC Televisión",
-            "tvg-logo": (process.env.BASE_URL || "localhost:8000") + "/api/v1/logos/logo-010.png",
+            "tvg-logo": (process.env.BASE_URL || "localhost:8000") + "/api/v1/logos/logo-181dtv.ec.png",
             "url": null,
-            "list-url": (process.env.BASE_URL || "localhost:8000") + "/api/v1/canales/canal-010.m3u8",
+            "list-url": (process.env.BASE_URL || "localhost:8000") + "/api/v1/canales/canal-181dtv.ec.m3u8",
             "strategy": "deep",
             "options": {
                 "webpages": ["https://www.tctelevision.com/tc-en-vivo"],
-                "target": "https://www.dailymotion.com/player/metadata/video/x7wijay",
+                "target": "https://www.dailymotion.com/cdn/live/video/x7wijay.m3u8",
                 "blockedTypes": [
                     // "xhr",
                     // "script",
@@ -192,12 +192,12 @@ export const ec: any = {
         },
         {
             "#EXTINF": -1,
-            "tvg-id": "026",
+            "tvg-id": "lch3095.ecu",
             "tvg-chno": 26,
             "tvg-name": "Oromar",
-            "tvg-logo": (process.env.BASE_URL || "localhost:8000") + "/api/v1/logos/logo-026.png",
+            "tvg-logo": (process.env.BASE_URL || "localhost:8000") + "/api/v1/logos/logo-lch3095.ecu.png",
             "url": "https://stream.oromartv.com:8082/hls/oromartv_hi/index.m3u8|Referer=https://oromartv.com/&Origin=https://oromartv.com",
-            "list-url": (process.env.BASE_URL || "localhost:8000") + "/api/v1/canales/canal-026.m3u8",
+            "list-url": (process.env.BASE_URL || "localhost:8000") + "/api/v1/canales/canal-lch3095.ecu.m3u8",
             "strategy": "direct",
             "options": {
                 "webpages": [],
@@ -224,12 +224,12 @@ export const ec: any = {
         },
         {
             "#EXTINF": -1,
-            "tvg-id": "032",
+            "tvg-id": "65mvstr.ec",
             "tvg-chno": 32,
             "tvg-name": "Telerama",
-            "tvg-logo": (process.env.BASE_URL || "localhost:8000") + "/api/v1/logos/logo-032.png",
+            "tvg-logo": (process.env.BASE_URL || "localhost:8000") + "/api/v1/logos/logo-65mvstr.ec.png",
             "url": "https://envivo.telerama.ec/stream.m3u8",
-            "list-url": (process.env.BASE_URL || "localhost:8000") + "/api/v1/canales/canal-032.m3u8",
+            "list-url": (process.env.BASE_URL || "localhost:8000") + "/api/v1/canales/canal-65mvstr.ec.m3u8",
             "strategy": "direct",
             "options": {
                 "webpages": [],

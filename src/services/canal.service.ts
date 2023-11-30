@@ -107,7 +107,7 @@ export async function getCanalContent(url: string, channelId: string): Promise<s
     });
 }
 
-export async function getCanalURL(timeout: number, channelId: string, options: {strategy: string, webpages: string[], target: string, blockedTypes: string[], blockedUrls: string[], }): Promise<string | undefined> {
+export async function getCanalURL(timeout: number, channelId: string, options: {strategy: string, webpages: string[], target: string, blockedTypes: string[], blockedUrls: string[]}): Promise<string | undefined> {
     let finalUrl;
 
     // const proxyServer = process.env.PROXY || '181.39.76.247:999';
@@ -167,28 +167,12 @@ export async function getCanalURL(timeout: number, channelId: string, options: {
                 }
             });
 
-            if (channelId === '010') {
-                const response = await page.waitForResponse(response => {
-                    return response.url().includes(options.target);
-                }, { timeout: timeout });
-        
-                if (response) {
-                    let r = await response.json();
-                    // console.log("")
-                    // console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
-                    // console.log(r)
-                    // console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
-                    // console.log("")
-                    finalUrl = r?.qualities?.auto[0]?.url;
-                }
-            } else {
-                const request = await page.waitForRequest(request => {
-                    return request.url().includes(options.target);
-                }, { timeout: timeout });
-        
-                if (request) {
-                    finalUrl = request.url();
-                }
+            const request = await page.waitForRequest(request => {
+                return request.url().includes(options.target);
+            }, { timeout: timeout });
+    
+            if (request) {
+                finalUrl = request.url();
             }
     
         } catch (error: any) {
